@@ -1,0 +1,97 @@
+[
+	{
+		"title": "Example Website 1",
+		"url": "https://example.com",
+		"summary": "A simple example website for demonstration purposes.",
+		"screenshots": [
+			{
+				"url": "https://placeholdr.ai/4073e65c-8900-4edd-a4bd-f46193614d50/1024/1024"
+			}
+		],
+		"details": {
+			"client": "Example Client",
+			"year": 2023,
+			"technologies": [
+				"HTML",
+				"CSS",
+				"JavaScript"
+			]
+		}
+	},
+	{
+		"title": "Cariari Pintor",
+		"url": "https://25-cariaripintor.vercel.app/",
+		"summary": "A website for a painter.",
+		"screenshots": [
+			{
+				"url": "https://placeholdr.ai/e788411c-ef1c-4431-8f47-1ab1f2265e65/1024/1024"
+			}
+		],
+		"details": {
+			"client": "Cariari Pintor",
+			"year": 2024,
+			"technologies": [
+				"SvelteKit",
+				"TailwindCSS",
+				"TypeScript"
+			]
+		}
+	},
+	{
+		"title": "Cariari Community",
+		"url": "https://25-cariari-community.vercel.app/",
+		"summary": "A community website.",
+		"screenshots": [
+			{
+				"url": "https://placeholdr.ai/8b04e969-e31a-477c-8237-6e0ca358b229/1024/1024"
+			}
+		],
+		"details": {
+			"client": "Cariari Community",
+			"year": 2024,
+			"technologies": [
+				"SvelteKit",
+				"Supabase",
+				"TypeScript"
+			]
+		}
+	},
+	{
+		"title": "Ad Agency",
+		"url": "https://25-ad-agency.vercel.app/",
+		"summary": "A website for an advertising agency.",
+		"screenshots": [
+			{
+				"url": "https://placeholdr.ai/25f84663-38d6-43f6-b88c-0573e63f5113/1024/1024"
+			}
+		],
+		"details": {
+			"client": "Ad Agency",
+			"year": 2024,
+			"technologies": [
+				"SvelteKit",
+				"SCSS",
+				"TypeScript"
+			]
+		}
+	},
+	{
+		"title": "Cariari Agency",
+		"url": "https://www.cariari.agency/",
+		"summary": "The official website for Cariari Agency.",
+		"screenshots": [
+			{
+				"url": "https://placeholdr.ai/e1f7daee-321d-4b70-b0b1-a313c936c7b0/1024/1024"
+			}
+		],
+		"details": {
+			"client": "Cariari Agency",
+			"year": 2023,
+			"technologies": [
+				"Next.js",
+				"React",
+				"TypeScript"
+			]
+		}
+	}
+]

@@ -1,0 +1,162 @@
+/* THEMING */
+:root {
+	color-scheme: light;
+
+	/* set defaults */
+	--brand: var(--brand-light);
+	--text-1: var(--text-1-light);
+	--text-2: var(--text-2-light);
+	--surface-1: var(--surface-1-light);
+	--surface-2: var(--surface-2-light);
+	--surface-3: var(--surface-3-light);
+	--surface-4: var(--surface-4-light);
+	--color-green: var(--green-3);
+	--color-red: var(--red-3);
+	--accent: var(--blue-7);
+}
+
+@media (prefers-color-scheme: dark) {
+	:root {
+		color-scheme: dark;
+
+		--brand: var(--brand-dark);
+		--text-1: var(--text-1-dark);
+		--text-2: var(--text-2-dark);
+		--surface-1: var(--surface-1-dark);
+		--surface-2: var(--surface-2-dark);
+		--surface-3: var(--surface-3-dark);
+		--surface-4: var(--surface-4-dark);
+		--color-green: var(--green-12);
+		--color-red: var(--red-12);
+		--accent: var(--yellow-3);
+	}
+}
+
+[color-scheme="light"] {
+	color-scheme: light;
+
+	--brand: var(--brand-light);
+	--text-1: var(--text-1-light);
+	--text-2: var(--text-2-light);
+	--surface-1: var(--surface-1-light);
+	--surface-2: var(--surface-2-light);
+	--surface-3: var(--surface-3-light);
+	--surface-4: var(--surface-4-light);
+	--color-green: var(--green-3);
+	--color-red: var(--red-3);
+	--accent: var(--blue-7);
+}
+
+[color-scheme="dark"] {
+	color-scheme: dark;
+
+	--brand: var(--brand-dark);
+	--text-1: var(--text-1-dark);
+	--text-2: var(--text-2-dark);
+	--surface-1: var(--surface-1-dark);
+	--surface-2: var(--surface-2-dark);
+	--surface-3: var(--surface-3-dark);
+	--surface-4: var(--surface-4-dark);
+	--color-green: var(--green-12);
+	--color-red: var(--red-12);
+	--accent: var(--yellow-3);
+}
+
+/* Additional global styles if needed */
+*,
+::before,
+::after {
+	box-sizing: border-box;
+}
+
+html {
+	/* common */
+	--transition: 120ms;
+
+	/* light */
+	--brand-light: var(--stone-12);
+	--text-1-light: var(--gray-8);
+	--text-2-light: var(--gray-7);
+	--surface-1-light: var(--gray-0);
+	--surface-2-light: var(--gray-1);
+	--surface-3-light: var(--gray-2);
+	--surface-4-light: var(--gray-3);
+
+	/* dark */
+	--brand-dark: var(--stone-1);
+	--text-1-dark: var(--gray-3);
+	--text-2-dark: var(--gray-5);
+	--surface-1-dark: var(--gray-12);
+	--surface-2-dark: var(--gray-11);
+	--surface-3-dark: var(--gray-10);
+	--surface-4-dark: var(--gray-9);
+
+	height: 100%;
+}
+
+body {
+	font-family: var(--font-rounded-sans);
+	padding: 0;
+	margin: 0;
+	background: var(--surface-1);
+	display: flex;
+	flex-direction: column;
+	min-height: 100vh;
+
+	/* Small tablets and larger mobile devices (481px - 768px) */
+	@media (min-width: 481px) {}
+
+	/* Tablets and small laptops (769px - 1024px) */
+	@media (min-width: 769px) {}
+
+	/* Large desktops and high-resolution screens (1025px and up) */
+	@media (min-width: 1025px) {
+		width: 1080px;
+		justify-self: center;
+	}
+
+	/* Extra-large screens (1440px and up) */
+	@media (min-width: 1440px) {}
+}
+
+pre {
+	white-space: pre-wrap;
+	word-wrap: break-word;
+	overflow-wrap: break-word;
+	max-width: 100%;
+	background-color: var(--surface-2);
+	border: var(--border-size-1) solid var(--surface-3);
+	border-radius: var(--radius-2);
+	padding: var(--size-3);
+	margin-block: var(--size-3);
+	font-family: monospace;
+	color: var(--text-1);
+	overflow-x: auto;
+}
+
+blockquote {
+	margin-block: var(--size-3);
+	padding: var(--size-2) var(--size-3);
+	border-left: var(--border-size-3) solid var(--surface-3);
+	background-color: var(--surface-2);
+	font-style: normal;
+	color: var(--text-1);
+	max-width: 100%;
+}
+
+code {
+	background-color: var(--surface-2);
+	color: var(--text-2);
+	padding: var(--size-1) var(--size-2);
+	border-radius: var(--radius-2);
+	font-family: monospace;
+	font-size: smaller;
+	border: none;
+}
+
+hr {
+	border: 0;
+	height: 1px;
+	background: var(--surface-3);
+	background-image: var(--gradient-16);
+}
