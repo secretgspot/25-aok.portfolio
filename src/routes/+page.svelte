@@ -88,29 +88,7 @@
 
 	@media (min-width: 1280px) {
 		.grid-container {
-			grid-template-columns: repeat(2, minmax(0, 1fr));
+			grid-template-columns: repeat(1, minmax(0, 1fr));
 		}
-	}
-
-	.project-card {
-		border-radius: var(--radius-3);
-		overflow: hidden;
-		box-shadow: var(--shadow-4);
-		transition: var(--transition-transform-ease-in-out);
-		transform: scale(1);
-		padding: var(--size-4);
-		text-align: center;
-		background-color: var(--gray-2);
-		color: var(--gray-8);
-		text-decoration: none;
-	}
-
-	.project-card:hover {
-		transform: scale(1.05);
-	}
-
-	.no-projects {
-		color: var(--gray-5);
-		grid-column: 1 / -1;
 	}
 </style>
