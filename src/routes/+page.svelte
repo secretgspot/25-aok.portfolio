@@ -60,7 +60,6 @@
 
 	.title {
 		font-size: var(--font-size-3);
-		font-weight: var(--font-weight-6);
 		margin-block-end: var(--size-4);
 	}
 
@@ -72,7 +71,7 @@
 
 	.grid-container {
 		display: grid;
-		gap: var(--size-4);
+		gap: var(--size-9);
 	}
 
 	@media (min-width: 768px) {

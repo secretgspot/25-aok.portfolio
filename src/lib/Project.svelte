@@ -11,8 +11,6 @@
 				<p class="project-summary">{summary}</p>
 			{/if}
 
-			<a href={url} target="_blank" rel="noopener noreferrer" class="project-link"
-				>Visit Website</a>
 			<a href="/{slug}" class="project-link">View Details</a>
 		</div>
 
@@ -54,7 +52,11 @@
 	{#if details}
 		<footer class="project-details">
 			{#if details.client}
-				<p><strong>Client:</strong> {details.client}</p>
+				<p>
+					<strong>Client:</strong>
+					<a href={url} target="_blank" rel="noopener noreferrer" class="project-link"
+						>{details.client}</a>
+				</p>
 			{/if}
 			{#if details.year}
 				<p><strong>Year:</strong> {details.year}</p>
@@ -71,14 +73,15 @@
 		/* Existing styles for project-card */
 		display: flex;
 		flex-direction: column;
-		border: var(--border-size-3) dashed var(--surface-3);
+		border: var(--border-size-3) double var(--surface-3);
 		border-radius: var(--radius-4);
 		margin: 0;
 		padding: 0;
 
 		.project-header {
 			display: grid;
-			position: relative; /* Needed for pseudo-element positioning */
+			position: relative;
+			margin-block-start: calc(var(--size-5) * -1);
 			> * {
 				grid-area: 1/1;
 			}
@@ -91,8 +94,8 @@
 				.project-summary {
 					color: var(--text-1);
 					place-self: center;
-					font-size: var(--size-fluid-3);
-					margin-inline: var(--size-9);
+					font-size: var(--size-fluid-1);
+					margin-inline: var(--size-3);
 				}
 
 				.project-link {
@@ -123,7 +126,6 @@
 		height: 100%;
 		overflow: hidden;
 		border-radius: var(--radius-4);
-		margin-block-start: calc(var(--size-5) * -1);
 		filter: blur(3px) opacity(0.3);
 		z-index: 1;
 		&::before {
@@ -142,8 +144,7 @@
 		width: 100%;
 		height: 100%;
 		object-fit: cover; /* Ensures the image covers the area without distortion */
-		transition: transform 0.3s ease-in-out; /* Smooth transition for zoom effect */
-		aspect-ratio: 2 / 1;
+		aspect-ratio: 3 / 1;
 	}
 
 	/* .project-header:hover .project-screenshot {
@@ -198,8 +199,8 @@
 		display: grid;
 		grid-template-columns: 1fr 1fr;
 		padding: var(--size-6);
-		border-bottom-left-radius: var(--radius-4);
-		border-bottom-right-radius: var(--radius-4);
+		border-bottom-left-radius: calc(var(--radius-4) / 1.2);
+		border-bottom-right-radius: calc(var(--radius-4) / 1.2);
 		position: relative; /* Needed for pseudo-element positioning */
 	}
 
