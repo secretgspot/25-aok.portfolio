@@ -2,28 +2,50 @@
 	let { url, title, summary, screenshots, details } = $props();
 </script>
 
-<div class="project-card">
-	<h3 class="project-title">{title}</h3>
-	{#if summary}
-		<p class="project-summary">{summary}</p>
-	{/if}
+<fieldset class="project-card">
+	<legend class="project-title">{title}</legend>
 
-	<a href={url} target="_blank" rel="noopener noreferrer" class="project-link"
-		>Visit Website</a>
+	<header class="project-header">
+		{#if summary}
+			<p class="project-summary">{summary}</p>
+		{/if}
 
-	{#if screenshots && screenshots.length > 0}
-		<div class="project-screenshot-container">
-			<img src={screenshots[0].url} alt="{title} screenshot" class="project-screenshot" />
+		<a href={url} target="_blank" rel="noopener noreferrer" class="project-link"
+			>Visit Website</a>
+
+		{#if screenshots && screenshots.length > 0}
+			<div class="project-screenshot-container">
+				<img
+					src={screenshots[0].url}
+					alt="{title} screenshot"
+					class="project-screenshot" />
+			</div>
+		{/if}
+	</header>
+
+	<div class="iframe-border-wrapper">
+		<div class="project-frame-container">
+			<iframe
+				src={url}
+				{title}
+				frameborder="0"
+				allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+				allowfullscreen></iframe>
 		</div>
-	{/if}
-
-	<div class="project-frame-container">
-		<iframe
-			src={url}
-			{title}
-			frameborder="0"
-			allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-			allowfullscreen></iframe>
+		<svg class="hand-drawn-border" viewBox="0 0 100 100" preserveAspectRatio="none">
+			<defs>
+				<linearGradient id="goldGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+					<stop offset="0%" stop-color="#FFD700" />
+					<stop offset="100%" stop-color="#DAA520" />
+				</linearGradient>
+			</defs>
+			<path
+				d="M2 2 L98 2 L98 98 L2 98 L2 2 Z"
+				fill="none"
+				stroke="url(#goldGradient)"
+				stroke-width="2"
+				vector-effect="non-scaling-stroke" />
+		</svg>
 	</div>
 
 	{#if details}
@@ -39,7 +61,7 @@
 			{/if}
 		</div>
 	{/if}
-</div>
+</fieldset>
 
 <style>
 	.project-card {
@@ -47,6 +69,15 @@
 		display: flex;
 		flex-direction: column;
 		gap: 1rem; /* Add some space between elements */
+		border: var(--border-size-3) dashed var(--surface-3);
+		border-radius: var(--radius-4);
+
+		.project-header {
+			display: grid;
+			> * {
+				grid-area: 1/1;
+			}
+		}
 	}
 
 	.project-title {
@@ -75,10 +106,10 @@
 
 	.project-screenshot-container {
 		width: 100%;
-		height: min-content;
+		height: 100%;
 		overflow: hidden;
-		border-radius: 4px;
-		box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+		border-radius: var(--radius-4);
+		transform: translateY(-10px);
 	}
 
 	.project-screenshot {
@@ -93,20 +124,31 @@
 		transform: scale(1.05); /* Slightly zoom in on hover */
 	}
 
-	.project-frame-container {
+	.iframe-border-wrapper {
 		position: relative;
 		width: 100%;
-		padding-top: 177.77%; /* 16:9 Aspect Ratio for mobile portrait */
+		padding-top: 177.77%; /* Same aspect ratio as iframe container */
+	}
+
+	.project-frame-container {
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
 		overflow: hidden;
 		border-radius: 8px;
 		box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+	}
 
-		/* Hand-drawn gold border styles */
-		border: 2px solid #ffd700; /* Gold color */
-		box-shadow:
-			0 0 0 3px #ffd700,
-			/* Thicker gold outline */ 2px 2px 0 5px rgba(0, 0, 0, 0.2),
-			/* Slight shadow for depth */ -2px -2px 0 5px rgba(0, 0, 0, 0.2);
+	.hand-drawn-border {
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		pointer-events: none; /* Allow clicks to pass through to the iframe */
+		transform: rotate(-1deg); /* Slight rotation for hand-drawn effect */
 	}
 
 	iframe {
@@ -120,7 +162,7 @@
 
 	/* Tablet and larger */
 	@media (min-width: 768px) {
-		.project-frame-container {
+		.iframe-border-wrapper {
 			padding-top: 56.25%; /* 16:9 Aspect Ratio */
 		}
 	}
