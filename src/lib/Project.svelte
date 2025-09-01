@@ -1,5 +1,5 @@
 <script>
-	let { url, title, summary, screenshots, details } = $props();
+	let { url, title, summary, screenshots, details, slug } = $props();
 </script>
 
 <fieldset class="project-card">
@@ -13,6 +13,7 @@
 
 			<a href={url} target="_blank" rel="noopener noreferrer" class="project-link"
 				>Visit Website</a>
+			<a href="/{slug}" class="project-link">View Details</a>
 		</div>
 
 		{#if screenshots && screenshots.length > 0}

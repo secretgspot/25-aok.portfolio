@@ -17,7 +17,8 @@
 				title={project.title}
 				summary={project.summary}
 				screenshots={project.screenshots}
-				details={project.details} />
+				details={project.details}
+				slug={project.slug} />
 		{/each}
 	</div>
 </div>
