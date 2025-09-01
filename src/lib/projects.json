@@ -1,24 +1,5 @@
 [
 	{
-		"title": "Example Website 1",
-		"url": "https://example.com",
-		"summary": "A simple example website for demonstration purposes.",
-		"screenshots": [
-			{
-				"url": "https://placeholdr.ai/4073e65c-8900-4edd-a4bd-f46193614d50/1024/1024"
-			}
-		],
-		"details": {
-			"client": "Example Client",
-			"year": 2023,
-			"technologies": [
-				"HTML",
-				"CSS",
-				"JavaScript"
-			]
-		}
-	},
-	{
 		"title": "Cariari Pintor",
 		"url": "https://25-cariaripintor.vercel.app/",
 		"summary": "A website for a painter.",

@@ -4,7 +4,7 @@
 	let logoSrc = '';
 
 	onMount(() => {
-		const randomNumber = Math.floor(Math.random() * 3) + 1; // Generates 1, 2, or 3
+		const randomNumber = Math.floor(Math.random() * 9) + 1; // Generates 1, 2, or 3
 		logoSrc = `/logos/logo_${randomNumber}.webp`;
 	});
 </script>
@@ -22,6 +22,7 @@
 		display: flex;
 		justify-content: center;
 		align-items: center;
+		place-self: end;
 	}
 
 	.logo-image {
