@@ -37,8 +37,8 @@
 		<svg class="hand-drawn-border" viewBox="0 0 100 100" preserveAspectRatio="none">
 			<defs>
 				<linearGradient id="goldGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-					<stop offset="0%" stop-color="#FFD700" />
-					<stop offset="100%" stop-color="#DAA520" />
+					<stop offset="0%" stop-color="#f0f8ff" />
+					<stop offset="100%" stop-color="#607d8b" />
 				</linearGradient>
 			</defs>
 			<path
@@ -70,7 +70,6 @@
 		/* Existing styles for project-card */
 		display: flex;
 		flex-direction: column;
-		gap: 1rem; /* Add some space between elements */
 		border: var(--border-size-3) dashed var(--surface-3);
 		border-radius: var(--radius-4);
 		margin: 0;
@@ -78,6 +77,7 @@
 
 		.project-header {
 			display: grid;
+			position: relative; /* Needed for pseudo-element positioning */
 			> * {
 				grid-area: 1/1;
 			}
@@ -125,6 +125,16 @@
 		margin-block-start: calc(var(--size-5) * -1);
 		filter: blur(3px) opacity(0.3);
 		z-index: 1;
+		&::before {
+			content: '';
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%; /* Cover the entire element */
+			background: linear-gradient(to top, var(--surface-1), transparent 50%);
+			pointer-events: none; /* Allow clicks to pass through */
+		}
 	}
 
 	.project-screenshot {
@@ -135,9 +145,9 @@
 		aspect-ratio: 2 / 1;
 	}
 
-	.project-header:hover .project-screenshot {
-		transform: scale(1.05); /* Slightly zoom in on hover */
-	}
+	/* .project-header:hover .project-screenshot {
+		transform: scale(1.05);
+	} */
 
 	.iframe-border-wrapper {
 		position: relative;
@@ -189,5 +199,17 @@
 		padding: var(--size-6);
 		border-bottom-left-radius: var(--radius-4);
 		border-bottom-right-radius: var(--radius-4);
+		position: relative; /* Needed for pseudo-element positioning */
+	}
+
+	.project-details::before {
+		content: '';
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%; /* Cover the entire element */
+		background: linear-gradient(to bottom, var(--surface-1), transparent 30%);
+		pointer-events: none; /* Allow clicks to pass through */
 	}
 </style>

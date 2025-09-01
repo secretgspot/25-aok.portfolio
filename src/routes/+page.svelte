@@ -6,9 +6,9 @@
 </script>
 
 <div class="container">
-	<h1 class="title">Projects</h1>
-
 	<Logo />
+
+	<h1 class="title">Projects</h1>
 
 	<div class="grid-container">
 		{#each projects as project}
