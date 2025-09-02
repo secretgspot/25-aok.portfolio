@@ -9,11 +9,11 @@
 		<p>Year: {project.details.year}</p>
 		<p>Technologies: {project.details.technologies.join(', ')}</p>
 	{/if}
-
-	<p>{project.summary}</p>
 	<p class="url">
 		URL: <a href={project.url} target="_blank" rel="noopener noreferrer">{project.url}</a>
 	</p>
+
+	<p>{project.summary}</p>
 </fieldset>
 
 <style>
