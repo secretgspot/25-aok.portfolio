@@ -7,10 +7,20 @@
 		"summary": "A website for a painter.",
 		"screenshots": [
 			{
-				"url": "https://placeholdr.ai/e788411c-ef1c-4431-8f47-1ab1f2265e65/1024/1024"
+				"title": "desktop lite",
+				"url": "https://i.imgur.com/eNDCR4c.jpeg"
 			},
 			{
-				"url": "https://placeholdr.ai/e788411c-ef1c-4431-8f47-1ab1f2265e65/1024/1024"
+				"title": "desktop",
+				"url": "https://i.imgur.com/2FNTKhS.jpeg"
+			},
+			{
+				"title": "mobile lite",
+				"url": "https://i.imgur.com/RDq6LSU.jpeg"
+			},
+			{
+				"title": "tablet lite",
+				"url": "https://i.imgur.com/bNJi5Ow.jpeg"
 			}
 		],
 		"details": {
