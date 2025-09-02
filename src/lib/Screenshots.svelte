@@ -1,10 +1,10 @@
 <script>
-	let { screenshots } = $props();
+	let { screenshots, max = Infinity } = $props();
 </script>
 
 {#if screenshots && screenshots.length > 0}
 	<div class="screenshots-grid">
-		{#each screenshots as screenshot}
+		{#each screenshots.slice(0, max) as screenshot}
 			<div class="screenshot-item" data-title={screenshot.title}>
 				<img src={screenshot.url} alt="Screenshot" class="screenshot-image" />
 			</div>

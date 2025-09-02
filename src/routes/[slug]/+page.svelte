@@ -2,6 +2,7 @@
 	import { page } from '$app/state';
 	import projects from '$lib/projects.json';
 	import Iframe from '$lib/Iframe.svelte';
+	import Screenshots from '$lib/Screenshots.svelte';
 
 	// Use $derived rune to reactively compute the project based on the slug
 	const project = $derived.by(() => {
@@ -22,15 +23,7 @@
 
 	{#if project.screenshots && project.screenshots.length > 0}
 		<h2>Screenshots</h2>
-		{#each project.screenshots as screenshot}
-			<div class="screenshot-wrap">
-				<span class="screenshot-title">{screenshot.title}</span>
-				<img
-					src={screenshot.url}
-					alt="{project.title} screenshot"
-					style="max-width: 100%; height: auto; margin-bottom: 1rem;" />
-			</div>
-		{/each}
+		<Screenshots screenshots={project.screenshots} />
 	{/if}
 
 	{#if project.details}
@@ -42,19 +35,3 @@
 {:else}
 	<p>Project not found.</p>
 {/if}
-
-<style>
-	.screenshot-wrap {
-		position: relative;
-
-		.screenshot-title {
-			color: var(--text-1);
-			position: absolute;
-			font-size: small;
-			background: var(--surface-1);
-			padding: var(--size-1) var(--size-2);
-			margin: var(--size-1);
-			border-radius: var(--radius-drawn-1);
-		}
-	}
-</style>

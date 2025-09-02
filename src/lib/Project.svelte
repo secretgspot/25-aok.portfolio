@@ -32,7 +32,7 @@
 		</header>
 	</a>
 
-	<Screenshots {screenshots} />
+	<Screenshots screenshots={screenshots.slice(1)} max={2} />
 
 	{#if details}
 		<footer class="project-details">
