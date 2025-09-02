@@ -1,5 +1,5 @@
 <script>
-	let { url, title, summary, screenshots, details, slug } = $props();
+	let { url, title, summary, screenshots, details, slug, logo } = $props();
 </script>
 
 <fieldset class="project-card">
@@ -9,7 +9,13 @@
 		<header class="project-header">
 			<div class="summary-url">
 				{#if summary}
-					<p class="project-summary">{summary}</p>
+					<p class="project-summary">
+						{#if logo}
+							<img src={logo} alt="{title} logo" class="project-logo" />
+						{/if}
+
+						{summary}
+					</p>
 				{/if}
 			</div>
 
@@ -127,14 +133,21 @@
 
 			.summary-url {
 				display: grid;
-				grid-template-columns: 1fr min-content;
-				z-index: 2;
 
 				.project-summary {
 					color: var(--text-1);
 					place-self: center;
 					font-size: var(--size-fluid-1);
 					margin-inline: var(--size-3);
+					display: flex;
+					align-items: center;
+					gap: var(--size-3);
+					flex-direction: column;
+
+					.project-logo {
+						height: 69px;
+						width: 69px;
+					}
 				}
 			}
 		}

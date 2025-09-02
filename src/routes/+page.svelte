@@ -10,6 +10,7 @@
 	<div class="grid-container">
 		{#each projects as project}
 			<Project
+				logo={project.logo}
 				url={project.url}
 				title={project.title}
 				summary={project.summary}
