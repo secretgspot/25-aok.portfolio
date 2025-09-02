@@ -11,7 +11,9 @@
 
 <div class="logo-container">
 	{#if logoSrc}
-		<img src={logoSrc} alt="Random Logo" class="logo-image" />
+		<a href="/">
+			<img src={logoSrc} alt="Random Logo" class="logo-image" />
+		</a>
 	{/if}
 </div>
 
