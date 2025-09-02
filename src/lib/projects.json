@@ -2,7 +2,7 @@
 	{
 		"title": "Cariari Pintor",
 		"slug": "cariari-pintor",
-		"url": "https://25-cariaripintor.vercel.app/",
+		"url": "https://25-cariaripintor.vercel.app",
 		"logo": "https://25-cariaripintor.vercel.app/assets/logo.svg",
 		"summary": "A website for a painter.",
 		"screenshots": [
@@ -34,7 +34,7 @@
 	{
 		"title": "Cariari Community",
 		"slug": "cariari-community",
-		"url": "https://25-cariari-community.vercel.app/",
+		"url": "https://25-cariari-community.vercel.app",
 		"logo": "https://25-cariari-community.vercel.app/logos/logo_basic_gold.svg",
 		"summary": "A community website.",
 		"screenshots": [
@@ -108,7 +108,7 @@
 	{
 		"title": "Ad Agency",
 		"slug": "ad-agency",
-		"url": "https://25-ad-agency.vercel.app/",
+		"url": "https://25-ad-agency.vercel.app",
 		"logo": "https://25-ad-agency.vercel.app/logos/logo.svg",
 		"summary": "A website for an advertising agency.",
 		"screenshots": [
@@ -150,7 +150,7 @@
 	{
 		"title": "Cariari Agency",
 		"slug": "cariari-agency",
-		"url": "https://www.cariari.agency/",
+		"url": "https://www.cariari.agency",
 		"logo": "https://www.cariari.agency/logo/logo_minimal_gold.svg",
 		"summary": "The official website for Cariari Agency.",
 		"screenshots": [
