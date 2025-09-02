@@ -159,6 +159,7 @@
 		.project-details {
 			background: var(--surface-3);
 			display: grid;
+			gap: var(--size-3);
 			grid-template-columns: 1fr 1fr;
 			padding: var(--size-6);
 			border-bottom-left-radius: calc(var(--radius-4) / 1.2);
@@ -173,6 +174,10 @@
 				height: 100%; /* Cover the entire element */
 				background: linear-gradient(to bottom, var(--surface-1), transparent 30%);
 				pointer-events: none; /* Allow clicks to pass through */
+			}
+
+			p {
+				margin-block: 0;
 			}
 		}
 	}
