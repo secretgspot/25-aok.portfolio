@@ -82,7 +82,7 @@
 			display: grid;
 			position: relative;
 			margin-block-start: calc(var(--size-5) * -1);
-			> * {
+			* {
 				grid-area: 1/1;
 			}
 
@@ -103,7 +103,7 @@
 					color: var(--text-2);
 					text-decoration: none;
 					font-weight: bold;
-					place-self: start;
+					justify-self: end;
 					margin: var(--size-3);
 					white-space: nowrap;
 					&:hover {
