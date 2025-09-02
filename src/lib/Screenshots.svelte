@@ -11,6 +11,12 @@
 						<img src={screenshot.url} alt="Screenshot" class="screenshot-image" />
 					</button>
 					<div popover id="popover-{i}" class="popover-content">
+						<button
+							popovertarget="popover-{i}"
+							popovertargetaction="hide"
+							class="close-button">
+							❌
+						</button>
 						<img src={screenshot.url} alt="Screenshot" class="popover-image" />
 					</div>
 				{:else}
@@ -76,8 +82,7 @@
 	}
 
 	.popover-content {
-		margin: auto;
-		border: var(--border-size-3) solid var(--surface-4);
+		border: var(--border-size-5) solid var(--surface-4);
 		border-radius: var(--radius-drawn-4);
 		padding: 0;
 		background: none;
@@ -92,5 +97,20 @@
 		width: 100%;
 		height: 100%;
 		object-fit: contain;
+	}
+
+	.close-button {
+		position: fixed;
+		top: 1rem;
+		right: 1rem;
+		background: var(--surface-1);
+		border: var(--border-size-2) solid var(--surface-4);
+		border-radius: 50%;
+		width: 2rem;
+		height: 2rem;
+		display: grid;
+		place-content: center;
+		cursor: pointer;
+		z-index: 1;
 	}
 </style>
