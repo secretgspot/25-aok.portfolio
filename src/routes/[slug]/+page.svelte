@@ -3,12 +3,11 @@
 	import projects from '$lib/projects.json';
 	import Iframe from '$lib/Iframe.svelte';
 
-	let project = null;
-
-	$: {
+	// Use $derived rune to reactively compute the project based on the slug
+	const project = $derived.by(() => {
 		const slug = page.params.slug;
-		project = projects.find((p) => p.slug === slug);
-	}
+		return projects.find((p) => p.slug === slug) || null;
+	});
 </script>
 
 {#if project}
