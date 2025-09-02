@@ -1,4 +1,6 @@
 <script>
+	import Screenshots from './Screenshots.svelte';
+
 	let { url, title, summary, screenshots, details, slug, logo } = $props();
 </script>
 
@@ -29,6 +31,8 @@
 			{/if}
 		</header>
 	</a>
+
+	<Screenshots {screenshots} />
 
 	{#if details}
 		<footer class="project-details">
