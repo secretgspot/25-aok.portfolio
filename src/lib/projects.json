@@ -39,7 +39,60 @@
 		"summary": "A community website.",
 		"screenshots": [
 			{
-				"url": "https://placeholdr.ai/8b04e969-e31a-477c-8237-6e0ca358b229/1024/1024"
+				"title": "desktop about",
+				"url": "https://i.imgur.com/eaRcJ8I.png"
+			},
+			{
+				"title": "desktop admin lite",
+				"url": "https://i.imgur.com/rH0TwSq.png"
+			},
+			{
+				"title": "desktop event",
+				"url": "https://i.imgur.com/X8HgBKb.png"
+			},
+			{
+				"title": "desktop login",
+				"url": "https://i.imgur.com/PZ5PlPl.png"
+			},
+			{
+				"title": "desktop lost and found edit",
+				"url": "https://i.imgur.com/zKKziRI.png"
+			},
+			{
+				"title": "desktop notice",
+				"url": "https://i.imgur.com/9Vy9Z1D.png"
+			},
+			{
+				"title": "desktop notice add lite",
+				"url": "https://i.imgur.com/49tNbFj.png"
+			},
+			{
+				"title": "desktop profile comments",
+				"url": "https://i.imgur.com/y6EjkP8.png"
+			},
+			{
+				"title": "deskktop profile settings lite",
+				"url": "https://i.imgur.com/FSrhtYw.png"
+			},
+			{
+				"title": "desktop profile",
+				"url": "https://i.imgur.com/SyO134W.png"
+			},
+			{
+				"title": "desktop loggedin lite",
+				"url": "https://i.imgur.com/Xet1wWw.png"
+			},
+			{
+				"title": "desktop",
+				"url": "https://i.imgur.com/mhEj1cU.png"
+			},
+			{
+				"title": "desktop service edit",
+				"url": "https://i.imgur.com/6DzLEQe.png"
+			},
+			{
+				"title": "desktop service",
+				"url": "https://i.imgur.com/ctrLMBJ.png"
 			}
 		],
 		"details": {
@@ -60,7 +113,28 @@
 		"summary": "A website for an advertising agency.",
 		"screenshots": [
 			{
-				"url": "https://placeholdr.ai/25f84663-38d6-43f6-b88c-0573e63f5113/1024/1024"
+				"title": "desktop add",
+				"url": "https://i.imgur.com/TsWEKaT.png"
+			},
+			{
+				"title": "desktop edit",
+				"url": "https://i.imgur.com/NnUVxHr.png"
+			},
+			{
+				"title": "desktop login lite",
+				"url": "https://i.imgur.com/XmPtblu.png"
+			},
+			{
+				"title": "mobile add lite",
+				"url": "https://i.imgur.com/L0mnSrF.png"
+			},
+			{
+				"title": "mobile edit lite",
+				"url": "https://i.imgur.com/YlaM00j.png"
+			},
+			{
+				"title": "mobile login",
+				"url": "https://i.imgur.com/dFwi77c.png"
 			}
 		],
 		"details": {
@@ -81,7 +155,44 @@
 		"summary": "The official website for Cariari Agency.",
 		"screenshots": [
 			{
-				"url": "https://placeholdr.ai/e1f7daee-321d-4b70-b0b1-a313c936c7b0/1024/1024"
+				"title": "mobile property add",
+				"url": "https://i.imgur.com/wg5iuJI_d.png?maxwidth=520&shape=thumb&fidelity=high"
+			},
+			{
+				"title": "mobile properties",
+				"url": "https://i.imgur.com/wyJov0T_d.png?maxwidth=520&shape=thumb&fidelity=high"
+			},
+			{
+				"title": "desktop properties lite",
+				"url": "https://i.imgur.com/i76MzSD_d.png?maxwidth=520&shape=thumb&fidelity=high"
+			},
+			{
+				"title": "desktop properties",
+				"url": "https://i.imgur.com/OJYO7OP_d.png?maxwidth=520&shape=thumb&fidelity=high"
+			},
+			{
+				"title": "desktop map lite",
+				"url": "https://i.imgur.com/jCY83H4_d.png?maxwidth=520&shape=thumb&fidelity=high"
+			},
+			{
+				"title": "desktop preview",
+				"url": "https://i.imgur.com/TdtlmBx_d.png?maxwidth=520&shape=thumb&fidelity=high"
+			},
+			{
+				"title": "mobile about",
+				"url": "https://i.imgur.com/O7rCjOu_d.png?maxwidth=520&shape=thumb&fidelity=high"
+			},
+			{
+				"title": "desktop login",
+				"url": "https://i.imgur.com/AfpBKIj_d.png?maxwidth=520&shape=thumb&fidelity=high"
+			},
+			{
+				"title": "desktop add",
+				"url": "https://i.imgur.com/suShI0A_d.png?maxwidth=520&shape=thumb&fidelity=high"
+			},
+			{
+				"title": "desktop edit",
+				"url": "https://i.imgur.com/suShI0A_d.png?maxwidth=520&shape=thumb&fidelity=high"
 			}
 		],
 		"details": {

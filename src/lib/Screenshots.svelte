@@ -5,7 +5,7 @@
 {#if screenshots && screenshots.length > 0}
 	<div class="screenshots-grid">
 		{#each screenshots as screenshot}
-			<div class="screenshot-item">
+			<div class="screenshot-item" data-title={screenshot.title}>
 				<img src={screenshot.url} alt="Screenshot" class="screenshot-image" />
 			</div>
 		{/each}
@@ -32,15 +32,27 @@
 		}
 
 		.screenshot-item {
+			position: relative;
 			overflow: hidden;
 			border-radius: var(--radius-2);
 			box-shadow: var(--shadow-2);
+			aspect-ratio: 1;
+			&::before {
+				content: attr(data-title);
+				color: var(--text-1);
+				position: absolute;
+				font-size: small;
+				background: var(--surface-1);
+				padding: var(--size-1) var(--size-2);
+				margin: var(--size-1);
+				border-radius: var(--radius-drawn-1);
+			}
 
 			.screenshot-image {
 				width: 100%;
-				height: auto;
+				height: 100%;
 				display: block;
-				object-fit: cover;
+				object-fit: contain;
 			}
 		}
 	}
