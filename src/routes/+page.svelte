@@ -1,13 +1,10 @@
 <script>
 	import Project from '$lib/Project.svelte';
 	import projects from '$lib/projects.json';
-	import Logo from '$lib/Logo.svelte';
 	/** @type {import('./$types').PageData} */
 </script>
 
 <div class="container">
-	<Logo />
-
 	<h1 class="title">Projects</h1>
 
 	<div class="grid-container">

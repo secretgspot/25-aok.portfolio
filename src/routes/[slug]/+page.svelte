@@ -1,6 +1,7 @@
 <script>
   import { page } from '$app/stores';
   import projects from '$lib/projects.json';
+  import Iframe from '$lib/Iframe.svelte';
 
   let project = null;
 
@@ -14,6 +15,8 @@
   <h1>{project.title}</h1>
   <p>{project.summary}</p>
   <p>URL: <a href={project.url} target="_blank" rel="noopener noreferrer">{project.url}</a></p>
+
+  <Iframe url={project.url} title={project.title} />
 
   {#if project.screenshots && project.screenshots.length > 0}
     <h2>Screenshots</h2>
