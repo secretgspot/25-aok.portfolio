@@ -1,12 +1,21 @@
 <script>
-	let { screenshots, max = Infinity } = $props();
+	let { screenshots, max = Infinity, popover = false } = $props();
 </script>
 
 {#if screenshots && screenshots.length > 0}
 	<div class="screenshots-grid">
-		{#each screenshots.slice(0, max) as screenshot}
+		{#each screenshots.slice(0, max) as screenshot, i}
 			<div class="screenshot-item" data-title={screenshot.title}>
-				<img src={screenshot.url} alt="Screenshot" class="screenshot-image" />
+				{#if popover}
+					<button popovertarget="popover-{i}" class="popover-button">
+						<img src={screenshot.url} alt="Screenshot" class="screenshot-image" />
+					</button>
+					<div popover id="popover-{i}" class="popover-content">
+						<img src={screenshot.url} alt="Screenshot" class="popover-image" />
+					</div>
+				{:else}
+					<img src={screenshot.url} alt="Screenshot" class="screenshot-image" />
+				{/if}
 			</div>
 		{/each}
 	</div>
@@ -55,5 +64,33 @@
 				object-fit: contain;
 			}
 		}
+	}
+
+	.popover-button {
+		padding: 0;
+		border: none;
+		background: none;
+		cursor: pointer;
+		width: 100%;
+		height: 100%;
+	}
+
+	.popover-content {
+		margin: auto;
+		border: var(--border-size-3) solid var(--surface-4);
+		border-radius: var(--radius-drawn-4);
+		padding: 0;
+		background: none;
+		max-width: 90vw;
+		max-height: 90vh;
+		&::backdrop {
+			background: var(--surface-1);
+		}
+	}
+
+	.popover-image {
+		width: 100%;
+		height: 100%;
+		object-fit: contain;
 	}
 </style>

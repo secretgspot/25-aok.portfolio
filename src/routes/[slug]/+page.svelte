@@ -20,7 +20,7 @@
 
 	{#if project.screenshots && project.screenshots.length > 0}
 		<h2>Screenshots</h2>
-		<Screenshots screenshots={project.screenshots} />
+		<Screenshots screenshots={project.screenshots} popover={true} />
 	{/if}
 {:else}
 	<p>Project not found.</p>
