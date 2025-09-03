@@ -3,13 +3,18 @@
 
 	let logoSrc = '';
 
-	onMount(() => {
-		const randomNumber = Math.floor(Math.random() * 108) + 1; // Generates 1, 2, or 3
+	function newLogo() {
+        // This might result in a 404 error if a logo for the generated number doesn't exist.
+		const randomNumber = Math.floor(Math.random() * 107) + 1;
 		logoSrc = `/logos/logo_${randomNumber}.webp`;
+	}
+
+	onMount(() => {
+		newLogo();
 	});
 </script>
 
-<div class="logo-container">
+<div class="logo-container" onclick={newLogo}>
 	{#if logoSrc}
 		<a href="/">
 			<img src={logoSrc} alt="Random Logo" class="logo-image" />
@@ -25,6 +30,7 @@
 		justify-content: center;
 		align-items: center;
 		place-self: end;
+        cursor: pointer;
 	}
 
 	.logo-image {
