@@ -32,7 +32,8 @@
 		width: min-content;
 		align-self: start;
 		gap: var(--size-1);
-		background: var(--surface-4);
+		background: var(--brand);
+		color: var(--surface-1);
 
 		.details-wrap {
 			display: grid;
@@ -47,6 +48,12 @@
 				margin-block: 0;
 				small {
 					color: var(--text-2);
+				}
+				a {
+					color: var(--surface-1);
+					&:hover {
+						color: var(--blue-6);
+					}
 				}
 			}
 		}
