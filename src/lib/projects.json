@@ -8,19 +8,19 @@
 		"screenshots": [
 			{
 				"title": "desktop lite",
-				"url": "https://i.imgur.com/eNDCR4c.jpeg"
+				"url": "https://i.imgur.com/kaTHfT2.png"
 			},
 			{
 				"title": "desktop",
-				"url": "https://i.imgur.com/2FNTKhS.jpeg"
+				"url": "https://i.imgur.com/i3XG22x.png"
 			},
 			{
 				"title": "mobile lite",
-				"url": "https://i.imgur.com/RDq6LSU.jpeg"
+				"url": "https://i.imgur.com/X07UmW0.png"
 			},
 			{
 				"title": "tablet lite",
-				"url": "https://i.imgur.com/bNJi5Ow.jpeg"
+				"url": "https://i.imgur.com/CTTCrkj.jpeg"
 			}
 		],
 		"details": {
@@ -114,27 +114,27 @@
 		"screenshots": [
 			{
 				"title": "desktop add",
-				"url": "https://i.imgur.com/TsWEKaT.png"
+				"url": "https://i.imgur.com/3DZVlZD.png"
 			},
 			{
 				"title": "desktop edit",
-				"url": "https://i.imgur.com/NnUVxHr.png"
+				"url": "https://i.imgur.com/T0ySdNx.png"
 			},
 			{
 				"title": "desktop login lite",
-				"url": "https://i.imgur.com/XmPtblu.png"
+				"url": "https://i.imgur.com/1TfEcRb.png"
 			},
 			{
 				"title": "mobile add lite",
-				"url": "https://i.imgur.com/L0mnSrF.png"
+				"url": "https://i.imgur.com/GW7iUCd.png"
 			},
 			{
 				"title": "mobile edit lite",
-				"url": "https://i.imgur.com/YlaM00j.png"
+				"url": "https://i.imgur.com/4Aj9jOd.png"
 			},
 			{
 				"title": "mobile login",
-				"url": "https://i.imgur.com/dFwi77c.png"
+				"url": "https://i.imgur.com/AwZuE1m.png"
 			}
 		],
 		"details": {
@@ -155,44 +155,72 @@
 		"summary": "The official website for Cariari Agency.",
 		"screenshots": [
 			{
+				"title": "desktop about lite",
+				"url": "https://i.imgur.com/uamXMYQ.png"
+			},
+			{
+				"title": "desktop about",
+				"url": "https://i.imgur.com/AySuSNj.png"
+			},
+			{
+				"title": "desktop property",
+				"url": "https://i.imgur.com/B1du3vN.jpeg"
+			},
+			{
 				"title": "mobile property add",
-				"url": "https://i.imgur.com/wg5iuJI_d.png?maxwidth=520&shape=thumb&fidelity=high"
+				"url": "https://i.imgur.com/okT5sAF.png"
+			},
+			{
+				"title": "mobile property edit",
+				"url": "https://i.imgur.com/6SKBTNq.png"
 			},
 			{
 				"title": "mobile properties",
-				"url": "https://i.imgur.com/wyJov0T_d.png?maxwidth=520&shape=thumb&fidelity=high"
+				"url": "https://i.imgur.com/wU0t4aH.png"
 			},
 			{
 				"title": "desktop properties lite",
-				"url": "https://i.imgur.com/i76MzSD_d.png?maxwidth=520&shape=thumb&fidelity=high"
+				"url": "https://i.imgur.com/0JkBKe2.png"
 			},
 			{
 				"title": "desktop properties",
-				"url": "https://i.imgur.com/OJYO7OP_d.png?maxwidth=520&shape=thumb&fidelity=high"
+				"url": "https://i.imgur.com/j0EmvrE.png"
+			},
+			{
+				"title": "mobile map",
+				"url": "https://i.imgur.com/0zf8p5N.png"
 			},
 			{
 				"title": "desktop map lite",
-				"url": "https://i.imgur.com/jCY83H4_d.png?maxwidth=520&shape=thumb&fidelity=high"
+				"url": "https://i.imgur.com/3wLWY90.png"
 			},
 			{
 				"title": "desktop preview",
-				"url": "https://i.imgur.com/TdtlmBx_d.png?maxwidth=520&shape=thumb&fidelity=high"
+				"url": "https://i.imgur.com/Uq9k4tK.png"
 			},
 			{
 				"title": "mobile about",
-				"url": "https://i.imgur.com/O7rCjOu_d.png?maxwidth=520&shape=thumb&fidelity=high"
+				"url": "https://i.imgur.com/Ma3hEDZ.png"
 			},
 			{
 				"title": "desktop login",
-				"url": "https://i.imgur.com/AfpBKIj_d.png?maxwidth=520&shape=thumb&fidelity=high"
+				"url": "https://i.imgur.com/5eaysUK.png"
 			},
 			{
 				"title": "desktop add",
-				"url": "https://i.imgur.com/suShI0A_d.png?maxwidth=520&shape=thumb&fidelity=high"
+				"url": "https://i.imgur.com/xaKyT3h.png"
+			},
+			{
+				"title": "desktop add lite",
+				"url": "https://i.imgur.com/rA6zSiS.png"
 			},
 			{
 				"title": "desktop edit",
-				"url": "https://i.imgur.com/suShI0A_d.png?maxwidth=520&shape=thumb&fidelity=high"
+				"url": "https://i.imgur.com/luvDKiE.png"
+			},
+			{
+				"title": "desktop edit lite",
+				"url": "https://i.imgur.com/ngIVjAg.png"
 			}
 		],
 		"details": {
