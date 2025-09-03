@@ -22,7 +22,11 @@
 	});
 </script>
 
-<div class="viewer-container">
+<details class="sample-html-details">
+	<summary class="sample-html-summary">
+		<h2>Live instance</h2>
+	</summary>
+
 	<!-- Device Toggle -->
 	<div class="device-toggle">
 		{#each Object.entries(devices) as [key, device]}
@@ -44,7 +48,7 @@
 				allowfullscreen></iframe>
 		</div>
 	</div>
-</div>
+</details>
 
 <style>
 	.viewer-container {
@@ -177,5 +181,63 @@
 	.iframe-wrapper[data-device='desktop'] .iframe-container {
 		/* transform: scale(1); */
 		box-shadow: var(--shadow-3, 0 4px 6px rgba(0, 0, 0, 0.1));
+	}
+
+	/*
+	Clearing
+
+	*/
+	.sample-html-details {
+		padding: var(--size-3);
+		margin-block: var(--size-9);
+		border: var(--border-size-2) solid var(--brand);
+		border-radius: var(--radius-3);
+	}
+	.sample-html-details[open] .sample-html-summary:before {
+		content: '❌';
+		animation: cat 0.2s cubic-bezier(0.01, 0.29, 0.38, 2.37);
+	}
+	.sample-html-summary {
+		list-style-image: none;
+		cursor: pointer;
+		position: relative;
+		display: flex;
+		align-items: center;
+		&::marker {
+			content: none;
+		}
+		&:before {
+			content: '▫';
+			width: 45px;
+			aspect-ratio: 1;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+		}
+		&:focus {
+			outline: none;
+		}
+		&::-webkit-details-marker {
+			display: none;
+		}
+		h2 {
+			margin: 0;
+		}
+	}
+
+	@keyframes speech {
+		from {
+			opacity: 0;
+			transform: scale(0.98);
+		}
+		to {
+			opacity: 1;
+			transform: none;
+		}
+	}
+	@keyframes cat {
+		50% {
+			transform: scale(1.1);
+		}
 	}
 </style>

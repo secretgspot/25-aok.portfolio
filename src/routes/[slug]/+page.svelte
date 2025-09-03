@@ -15,7 +15,6 @@
 {#if project}
 	<Details {project} />
 
-	<h2>Live instance</h2>
 	<Iframe url={project.url} title={project.title} />
 
 	{#if project.screenshots && project.screenshots.length > 0}

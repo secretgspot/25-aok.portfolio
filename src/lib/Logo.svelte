@@ -14,13 +14,13 @@
 	});
 </script>
 
-<div class="logo-container" onclick={newLogo}>
-	{#if logoSrc}
-		<a href="/">
+{#if logoSrc}
+	<a href="/" onclick={newLogo}>
+		<div class="logo-container">
 			<img src={logoSrc} alt="Random Logo" class="logo-image" />
-		</a>
-	{/if}
-</div>
+		</div>
+	</a>
+{/if}
 
 <style>
 	.logo-container {
