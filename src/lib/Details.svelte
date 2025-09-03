@@ -2,8 +2,7 @@
 	let { project } = $props();
 </script>
 
-<fieldset>
-	<legend>Details</legend>
+<aside class="details">
 	<div class="details-wrap">
 		<img src={project.logo} alt="logo" class="client-logo" />
 		{#if project.details}
@@ -21,10 +20,10 @@
 	</div>
 
 	<p class="summary">{project.summary}</p>
-</fieldset>
+</aside>
 
 <style>
-	fieldset {
+	.details {
 		/* border: var(--border-size-3) double var(--surface-1); */
 		border: none;
 		border-radius: var(--radius-4);
@@ -34,14 +33,6 @@
 		align-self: start;
 		gap: var(--size-1);
 		background: var(--surface-4);
-
-		legend {
-			margin-inline: var(--size-3);
-			padding-inline: var(--size-3);
-			background: var(--surface-4);
-			border-radius: var(--radius-4);
-			padding-block: var(--size-1) 0;
-		}
 
 		.details-wrap {
 			display: grid;

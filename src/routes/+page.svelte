@@ -1,5 +1,6 @@
 <script>
 	import Project from '$lib/Project.svelte';
+	import Card from '$lib/Card.svelte';
 	import projects from '$lib/projects.json';
 	/** @type {import('./$types').PageData} */
 </script>
@@ -9,13 +10,20 @@
 
 	<div class="grid-container">
 		{#each projects as project}
-			<Project
+			<!-- <Project
 				logo={project.logo}
 				url={project.url}
 				title={project.title}
 				summary={project.summary}
 				screenshots={project.screenshots}
 				details={project.details}
+				slug={project.slug} /> -->
+			<Card
+				logo={project.logo}
+				url={project.url}
+				title={project.title}
+				summary={project.summary}
+				year={project.details.year}
 				slug={project.slug} />
 		{/each}
 	</div>
@@ -52,24 +60,7 @@
 
 	.grid-container {
 		display: grid;
-		gap: var(--size-9);
-	}
-
-	@media (min-width: 768px) {
-		.grid-container {
-			grid-template-columns: repeat(1, minmax(0, 1fr));
-		}
-	}
-
-	@media (min-width: 1024px) {
-		.grid-container {
-			grid-template-columns: repeat(1, minmax(0, 1fr));
-		}
-	}
-
-	@media (min-width: 1280px) {
-		.grid-container {
-			grid-template-columns: repeat(1, minmax(0, 1fr));
-		}
+		gap: var(--size-4);
+		grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
 	}
 </style>
