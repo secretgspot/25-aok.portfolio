@@ -4,8 +4,8 @@
 	let logoSrc = '';
 
 	function newLogo() {
-        // This might result in a 404 error if a logo for the generated number doesn't exist.
-		const randomNumber = Math.floor(Math.random() * 107) + 1;
+		// This might result in a 404 error if a logo for the generated number doesn't exist.
+		const randomNumber = Math.floor(Math.random() * 136) + 1;
 		logoSrc = `/logos/logo_${randomNumber}.webp`;
 	}
 
@@ -30,7 +30,7 @@
 		justify-content: center;
 		align-items: center;
 		place-self: end;
-        cursor: pointer;
+		cursor: pointer;
 	}
 
 	.logo-image {
