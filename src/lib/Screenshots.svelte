@@ -62,6 +62,9 @@
 				margin: var(--size-1);
 				border-radius: var(--radius-drawn-1);
 			}
+			&:hover {
+				animation: pop 0.3s cubic-bezier(0.01, 0.29, 0.38, 2.37);
+			}
 
 			.screenshot-image {
 				width: 100%;
@@ -69,6 +72,12 @@
 				display: block;
 				object-fit: contain;
 			}
+		}
+	}
+
+	@keyframes pop {
+		50% {
+			transform: scale(1.01);
 		}
 	}
 
