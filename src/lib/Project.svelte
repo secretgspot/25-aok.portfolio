@@ -147,6 +147,7 @@
 					align-items: center;
 					gap: var(--size-3);
 					flex-direction: column;
+					max-width: 45ch;
 
 					.project-logo {
 						height: 69px;

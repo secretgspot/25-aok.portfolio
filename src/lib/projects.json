@@ -4,7 +4,7 @@
 		"slug": "cariari-pintor",
 		"url": "https://25-cariaripintor.vercel.app",
 		"logo": "https://25-cariaripintor.vercel.app/assets/logo.svg",
-		"summary": "A website for a painter.",
+		"summary": "Single page website for an exterior home painting services in Cariari area.",
 		"screenshots": [
 			{
 				"title": "desktop lite",
@@ -36,7 +36,7 @@
 		"slug": "cariari-community",
 		"url": "https://25-cariari-community.vercel.app",
 		"logo": "https://25-cariari-community.vercel.app/logos/logo_basic_gold.svg",
-		"summary": "A community website.",
+		"summary": "A central online hub for the Cariari community, fostering connection, information sharing, and engagement.",
 		"screenshots": [
 			{
 				"title": "desktop about",
@@ -110,7 +110,7 @@
 		"slug": "ad-agency",
 		"url": "https://25-ad-agency.vercel.app",
 		"logo": "https://25-ad-agency.vercel.app/logos/logo.svg",
-		"summary": "A website for an advertising agency.",
+		"summary": "Simple Ad management system for use on local sites that are part of the same network.",
 		"screenshots": [
 			{
 				"title": "desktop add",
@@ -152,7 +152,7 @@
 		"slug": "cariari-agency",
 		"url": "https://www.cariari.agency",
 		"logo": "https://www.cariari.agency/logo/logo_minimal_gold.svg",
-		"summary": "The official website for Cariari Agency.",
+		"summary": "Cariari.Agency is a real estate listing platform.",
 		"screenshots": [
 			{
 				"title": "desktop about lite",
