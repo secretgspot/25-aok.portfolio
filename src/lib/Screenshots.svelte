@@ -97,8 +97,17 @@
 		background: none;
 		max-width: 90vw;
 		max-height: 90vh;
+		transition: transform 0.3s cubic-bezier(0.01, 0.29, 0.38, 2.37), opacity 0.2s linear;
+
 		&::backdrop {
 			background: var(--surface-1);
+		}
+	}
+
+	@starting-style {
+		.popover-content {
+			opacity: 0;
+			transform: scale(0.95);
 		}
 	}
 
