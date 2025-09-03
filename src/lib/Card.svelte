@@ -38,12 +38,12 @@
 		display: block;
 		border-radius: var(--radius-3);
 		overflow: hidden;
-		/* Remove background and animation from here */
+		position: relative;
 	}
 
 	.card {
 		background: var(--surface-4);
-		border: var(--border-size-3) solid var(--surface-4); /* Initial border color matches card background */
+		border: var(--border-size-3) solid var(--surface-4);
 		border-radius: var(--radius-3);
 		padding: var(--size-3);
 		display: flex;
@@ -51,13 +51,37 @@
 		justify-content: space-between;
 		height: 100%;
 		box-shadow: var(--shadow-2);
-		transition: border-color 0.3s ease; /* Transition only border-color */
+		position: relative;
+		z-index: 1;
+	}
+
+	.card-link::before {
+		content: '';
+		position: absolute;
+		top: 0;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		background: var(--gradient-6);
+		background-size: 200% 200%;
+		border-radius: var(--radius-3);
+		opacity: 0;
+		transition: opacity 1s cubic-bezier(0.01, 0.29, 0.38, 2.37);
+		z-index: 0;
+	}
+
+	.card-link:hover::before {
+		opacity: 1;
+		animation: gradient 2s ease infinite;
 	}
 
 	.card-link:hover .card {
-		border-image: var(--gradient-6);
-		border-image-slice: 1;
-		animation: gradient 1s ease infinite;
+		background: transparent;
+		border: var(--border-size-3) solid transparent;
+
+		p {
+			color: var(--surface-1);
+		}
 	}
 
 	header {
