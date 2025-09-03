@@ -22,23 +22,6 @@
 </div>
 
 <style>
-	:root {
-		--size-fluid-1: clamp(1rem, 2vw, 2rem);
-		--size-fluid-2: clamp(1.25rem, 3vw, 2.5rem);
-		--size-4: 1rem;
-		--size-8: 2rem;
-		--size-12: 3rem;
-		--size-24: 6rem;
-		--font-size-3: 1.5rem;
-		--font-size-5: 2.25rem;
-		--font-weight-6: 700;
-		--gray-6: #6b7280;
-		--gray-5: #6b7280;
-		--shadow-4: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
-		--radius-3: 0.5rem;
-		--transition-transform-ease-in-out: transform 0.3s ease-in-out;
-	}
-
 	.container {
 		padding-inline: var(--size-4);
 		padding-block: var(--size-8);

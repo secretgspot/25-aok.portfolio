@@ -93,7 +93,7 @@
 		.project-header {
 			display: grid;
 			position: relative;
-			margin-block-start: calc(var(--size-5) * -1);
+			margin-block-start: calc(var(--size-3) * -1);
 			&::before {
 				content: '';
 				position: absolute;
