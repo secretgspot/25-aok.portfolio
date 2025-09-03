@@ -42,6 +42,7 @@ export const actions = {
 				html: html,
 			};
 
+			/** @param {any} message */
 			const sendEmail = async (message) => {
 				await new Promise((resolve, reject) => {
 					transporter.sendMail(message, (error, info) => {
