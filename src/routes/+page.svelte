@@ -41,18 +41,6 @@
 		padding-block: var(--size-8);
 	}
 
-	@media (min-width: 768px) {
-		.container {
-			padding-inline: var(--size-12);
-		}
-	}
-
-	@media (min-width: 1024px) {
-		.container {
-			padding-inline: var(--size-24);
-		}
-	}
-
 	.title {
 		font-size: var(--font-size-3);
 		margin-block-end: var(--size-4);

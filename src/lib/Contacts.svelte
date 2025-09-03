@@ -94,6 +94,11 @@
 		}
 	}
 
+	.container {
+		margin-block: var(--size-9);
+		padding-inline: var(--size-4);
+		padding-block: var(--size-8);
+	}
 	.contact-form {
 		min-height: 36vh;
 		background: var(--surface-4);
@@ -134,6 +139,7 @@
 		border-radius: var(--radius-2);
 		box-shadow: 0 2px 0 0 var(--brand);
 
+		min-width: 18ch;
 		min-block-size: 6ch;
 		padding-inline: 2ch;
 
