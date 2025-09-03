@@ -41,33 +41,39 @@
 		&:hover {
 			border-color: var(--surface-4);
 		}
-	}
 
-	header {
-		display: flex;
-		align-items: center;
-		gap: var(--size-3);
-	}
+		header {
+			display: flex;
+			align-items: center;
+			gap: var(--size-3);
 
-	.logo {
-		width: 50px;
-		height: 50px;
-	}
+			.logo {
+				width: 63px;
+				height: 63px;
+				aspect-ratio: 1;
+				object-fit: contain;
+			}
 
-	h1 {
-		font-size: var(--font-size-3);
-		margin: 0;
-	}
+			h1 {
+				font-size: var(--font-size-3);
+				margin: 0;
+			}
+		}
 
-	main {
-		flex-grow: 1;
-	}
+		main {
+			flex-grow: 1;
+		}
 
-	footer {
-		display: flex;
-		justify-content: space-between;
-		align-items: center;
-		font-size: small;
-		color: var(--text-2);
+		footer {
+			display: flex;
+			justify-content: flex-end;
+			align-items: center;
+			font-size: small;
+			color: var(--text-2);
+
+			p {
+				margin: 0;
+			}
+		}
 	}
 </style>
