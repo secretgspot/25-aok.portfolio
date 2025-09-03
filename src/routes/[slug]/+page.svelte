@@ -22,8 +22,8 @@
 		<h2>Screenshots</h2>
 		<Screenshots screenshots={project.screenshots} popover={true} />
 	{/if}
-
-	<Logo position="start" />
 {:else}
 	<p>Project not found.</p>
 {/if}
+
+<Logo position="start" />

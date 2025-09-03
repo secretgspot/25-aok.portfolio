@@ -1,11 +1,13 @@
 <script>
+	/** @type {import('./$types').PageData} */
 	import Project from '$lib/Project.svelte';
 	import Card from '$lib/Card.svelte';
 	import projects from '$lib/projects.json';
-	/** @type {import('./$types').PageData} */
+	import Logo from '$lib/Logo.svelte';
+	import Contacts from '$lib/Contacts.svelte';
 </script>
 
-<div class="container">
+<section class="container">
 	<h1 class="title">Projects</h1>
 
 	<div class="grid-container">
@@ -27,7 +29,11 @@
 				slug={project.slug} />
 		{/each}
 	</div>
-</div>
+</section>
+
+<Contacts />
+
+<Logo position="start" />
 
 <style>
 	.container {
