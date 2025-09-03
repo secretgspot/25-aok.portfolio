@@ -22,13 +22,16 @@
 <style>
 	@keyframes gradient {
 		0% {
-			background-position: 0% 50%;
+			background-position: bottom left;
+			background-size: 100% 100%;
 		}
 		50% {
-			background-position: 100% 50%;
+			background-position: center center;
+			background-size: 300% 300%;
 		}
 		100% {
-			background-position: 0% 50%;
+			background-position: top right;
+			background-size: 200% 200%;
 		}
 	}
 
@@ -63,6 +66,7 @@
 		right: 0;
 		bottom: 0;
 		background: var(--gradient-6);
+		background-position: center center;
 		background-size: 200% 200%;
 		border-radius: var(--radius-3);
 		opacity: 0;
@@ -72,7 +76,7 @@
 
 	.card-link:hover::before {
 		opacity: 1;
-		animation: gradient 2s ease infinite;
+		animation: gradient 3s ease infinite;
 	}
 
 	.card-link:hover .card {
