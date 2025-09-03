@@ -54,6 +54,7 @@
 	.live-instance {
 		padding: var(--size-3);
 		margin-block: var(--size-9);
+		margin-inline: var(--size-3);
 		border: var(--border-size-2) solid var(--brand);
 		border-radius: var(--radius-3);
 	}

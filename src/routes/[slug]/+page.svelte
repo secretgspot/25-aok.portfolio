@@ -19,7 +19,6 @@
 	<Iframe url={project.url} title={project.title} />
 
 	{#if project.screenshots && project.screenshots.length > 0}
-		<h2>Screenshots</h2>
 		<Screenshots screenshots={project.screenshots} popover={true} />
 	{/if}
 {:else}

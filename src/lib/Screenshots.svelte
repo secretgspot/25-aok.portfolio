@@ -2,39 +2,45 @@
 	let { screenshots, max = Infinity, popover = false } = $props();
 </script>
 
-{#if screenshots && screenshots.length > 0}
-	<div class="screenshots-grid">
-		{#each screenshots.slice(0, max) as screenshot, i}
-			<div class="screenshot-item" data-title={screenshot.title}>
-				{#if popover}
-					<button popovertarget="popover-{i}" class="popover-button">
-						<img src={screenshot.url} alt="Screenshot" class="screenshot-image" />
-					</button>
-					<div popover id="popover-{i}" class="popover-content">
-						<button
-							popovertarget="popover-{i}"
-							popovertargetaction="hide"
-							class="close-button">
-							❌
+<section class="screenshots">
+	<h2>Screenshots</h2>
+
+	{#if screenshots && screenshots.length > 0}
+		<div class="screenshots-grid">
+			{#each screenshots.slice(0, max) as screenshot, i}
+				<div class="screenshot-item" data-title={screenshot.title}>
+					{#if popover}
+						<button popovertarget="popover-{i}" class="popover-button">
+							<img src={screenshot.url} alt="Screenshot" class="screenshot-image" />
 						</button>
-						<img src={screenshot.url} alt="Screenshot" class="popover-image" />
-					</div>
-				{:else}
-					<img src={screenshot.url} alt="Screenshot" class="screenshot-image" />
-				{/if}
-			</div>
-		{/each}
-	</div>
-{:else}
-	<p>No screenshots available.</p>
-{/if}
+						<div popover id="popover-{i}" class="popover-content">
+							<button
+								popovertarget="popover-{i}"
+								popovertargetaction="hide"
+								class="close-button">
+								❌
+							</button>
+							<img src={screenshot.url} alt="Screenshot" class="popover-image" />
+						</div>
+					{:else}
+						<img src={screenshot.url} alt="Screenshot" class="screenshot-image" />
+					{/if}
+				</div>
+			{/each}
+		</div>
+	{:else}
+		<p>No screenshots available.</p>
+	{/if}
+</section>
 
 <style>
+	.screenshots {
+		margin-inline: var(--size-3);
+	}
 	.screenshots-grid {
 		display: grid;
 		grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
 		gap: var(--size-3);
-		padding: var(--size-3);
 
 		/* Tablet and larger */
 		@media (min-width: 768px) {
@@ -50,7 +56,7 @@
 			position: relative;
 			overflow: hidden;
 			border: var(--border-size-2) solid var(--brand);
-			border-radius: var(--radius-2);
+			border-radius: var(--radius-drawn-3);
 			box-shadow: var(--shadow-2);
 			aspect-ratio: 1;
 			&::before {
