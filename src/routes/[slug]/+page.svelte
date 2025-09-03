@@ -4,6 +4,7 @@
 	import Iframe from '$lib/Iframe.svelte';
 	import Screenshots from '$lib/Screenshots.svelte';
 	import Details from '$lib/Details.svelte';
+	import Logo from '$lib/Logo.svelte';
 
 	// Use $derived rune to reactively compute the project based on the slug
 	const project = $derived.by(() => {
@@ -21,6 +22,8 @@
 		<h2>Screenshots</h2>
 		<Screenshots screenshots={project.screenshots} popover={true} />
 	{/if}
+
+	<Logo position="start" />
 {:else}
 	<p>Project not found.</p>
 {/if}

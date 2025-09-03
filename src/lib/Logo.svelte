@@ -1,7 +1,9 @@
 <script>
 	import { onMount } from 'svelte';
 
-	let logoSrc = '';
+	let { position } = $props();
+
+	let logoSrc = $state('');
 
 	function newLogo() {
 		// This might result in a 404 error if a logo for the generated number doesn't exist.
@@ -15,7 +17,7 @@
 </script>
 
 {#if logoSrc}
-	<a href="/" onclick={newLogo}>
+	<a href="/" onclick={newLogo} class="logo {position}">
 		<div class="logo-container">
 			<img src={logoSrc} alt="Random Logo" class="logo-image" />
 		</div>
@@ -23,13 +25,21 @@
 {/if}
 
 <style>
+	.logo {
+		&.start {
+			place-self: start;
+		}
+		&.end {
+			place-self: end;
+		}
+	}
 	.logo-container {
 		width: 93px;
 		height: 93px;
 		display: flex;
 		justify-content: center;
 		align-items: center;
-		place-self: end;
+		place-self: center;
 		cursor: pointer;
 	}
 
