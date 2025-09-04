@@ -124,36 +124,6 @@ export function playButtonSound(patternName) {
 }
 
 /**
- * Plays a navigation sound.
- * @param {string} [patternName] - Optional: The name of the pattern to play. Defaults to settings.navigation_sound_pattern.
- */
-export function playNavigationSound(patternName) {
-	const currentSettings = get(settings);
-	if (!currentSettings.navigation_sound) return;
-	const pattern = patternName ? chimePatterns[patternName] : chimePatterns[currentSettings.navigation_sound_pattern];
-	playSound(pattern);
-}
-
-/**
- * Plays a notification sound.
- * @param {'success'|'fail'|'notification'} type - The type of notification.
- */
-export function playNotificationSound(type = 'notification') {
-	const currentSettings = get(settings);
-	if (!currentSettings.notification_sound) return;
-	let patternName;
-	if (type === 'success') {
-		patternName = currentSettings.notification_success_sound_pattern;
-	} else if (type === 'fail') {
-		patternName = currentSettings.notification_error_sound_pattern;
-	} else {
-		patternName = currentSettings.notification_sound_pattern;
-	}
-	const pattern = chimePatterns[patternName];
-	playSound(pattern);
-}
-
-/**
  * Attaches a click sound to an element.
  * @param {HTMLElement} node - The element to attach the sound to.
  * @param {string} [pattern='click'] - The name of the sound pattern to play from chimePatterns.

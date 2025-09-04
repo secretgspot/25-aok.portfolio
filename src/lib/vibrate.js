@@ -58,52 +58,6 @@ export function vibrateButton(patternName) {
 	vibrate(pattern);
 }
 
-/**
- * Triggers a navigation vibration.
- */
-export function vibrateNavigation(patternName) {
-	const currentSettings = get(settings);
-	if (!currentSettings.navigation_buzz) return;
-	const pattern = patternName ? vibratePatterns[patternName] : vibratePatterns[currentSettings.navigation_vibration_pattern];
-	vibrate(pattern);
-}
-
-/**
- * Triggers a notification vibration.
- * @param {'success'|'fail'|'notification'} type - The type of notification.
- */
-export function vibrateNotification(type = 'notification') {
-	const currentSettings = get(settings);
-	if (!currentSettings.notification_buzz) return;
-	let patternName;
-	if (type === 'success') {
-		patternName = currentSettings.notification_success_vibration_pattern;
-	} else if (type === 'fail') {
-		patternName = currentSettings.notification_error_vibration_pattern;
-	} else {
-		patternName = currentSettings.notification_vibration_pattern;
-	}
-	const pattern = vibratePatterns[patternName];
-	vibrate(pattern);
-}
-
-/**
- * Check if vibration is supported on current device/browser
- * @returns {boolean} - True if vibration API is available
- */
-export function isVibrationSupported() {
-	return "vibrate" in navigator;
-}
-
-/**
- * Stop any ongoing vibration
- */
-export function stopVibration() {
-	if ("vibrate" in navigator) {
-		navigator.vibrate(0);
-	}
-}
-
 
 /**
  * Attaches a vibration to an element's click event.
