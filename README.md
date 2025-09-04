@@ -30,7 +30,7 @@
 
 ```
 
-Simple portfolio showing list of latest projects with live view via iframe and a contact form.
+Simple portfolio showing list of latest projects, contact form and a live view via iframe.
 
 ## Tech stack
 
