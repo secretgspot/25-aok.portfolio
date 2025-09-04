@@ -1,5 +1,7 @@
 <script>
 	import { onMount } from 'svelte';
+	import { sound } from '$lib/audio.js';
+	import { buzz } from '$lib/vibrate.js';
 
 	let { url, title } = $props();
 	let selectedDevice = $state('desktop');
@@ -23,14 +25,14 @@
 </script>
 
 <details class="live-instance">
-	<summary class="summary">
+	<summary class="summary" use:sound={'live_instance'} use:buzz={'live_instance'}>
 		<h2>Live instance</h2>
 	</summary>
 
 	<!-- Device Toggle -->
 	<div class="device-toggle">
 		{#each Object.entries(devices) as [key, device]}
-			<label class="toggle-option">
+			<label class="toggle-option" use:sound={'tick'} use:buzz={'tick'}>
 				<input type="radio" name="device-size" value={key} bind:group={selectedDevice} />
 				<span class="toggle-label">{device.label}</span>
 			</label>

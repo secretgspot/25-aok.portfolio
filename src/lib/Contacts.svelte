@@ -1,5 +1,7 @@
 <script>
 	import { enhance } from '$app/forms';
+	import { sound } from '$lib/audio.js';
+	import { buzz } from '$lib/vibrate.js';
 
 	// let { data } = $props();
 
@@ -68,7 +70,7 @@
 			></textarea>
 
 			<div class="button-wrap">
-				<button type="submit" disabled={sending}>
+				<button type="submit" disabled={sending} use:sound={'send'} use:buzz={'basic'}>
 					{#snippet icon()}
 						🎈
 					{/snippet}

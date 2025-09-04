@@ -1,8 +1,10 @@
 <script>
+	import { sound } from '$lib/audio.js';
+	import { buzz } from '$lib/vibrate.js';
 	let { slug, logo, title, summary, url, year } = $props();
 </script>
 
-<a href="/{slug}" class="card-link">
+<a href="/{slug}" use:sound={'card'} use:buzz={'basic'} class="card-link">
 	<div class="card">
 		<header>
 			{#if logo}

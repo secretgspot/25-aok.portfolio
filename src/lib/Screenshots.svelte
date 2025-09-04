@@ -1,4 +1,6 @@
 <script>
+	import { sound } from '$lib/audio.js';
+	import { buzz } from '$lib/vibrate.js';
 	let { screenshots, max = Infinity, popover = false } = $props();
 </script>
 
@@ -10,13 +12,19 @@
 			{#each screenshots.slice(0, max) as screenshot, i}
 				<div class="screenshot-item" data-title={screenshot.title}>
 					{#if popover}
-						<button popovertarget="popover-{i}" class="popover-button">
+						<button
+							popovertarget="popover-{i}"
+							use:sound={'screenshot'}
+							use:buzz={'screenshot'}
+							class="popover-button">
 							<img src={screenshot.url} alt="Screenshot" class="screenshot-image" />
 						</button>
 						<div popover id="popover-{i}" class="popover-content">
 							<button
 								popovertarget="popover-{i}"
 								popovertargetaction="hide"
+								use:sound={'swipe'}
+								use:buzz={'close'}
 								class="close-button">
 								❌
 							</button>

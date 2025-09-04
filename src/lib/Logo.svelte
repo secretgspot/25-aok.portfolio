@@ -1,5 +1,7 @@
 <script>
 	import { onMount } from 'svelte';
+	import { sound } from '$lib/audio.js';
+	import { buzz } from '$lib/vibrate.js';
 
 	let { position } = $props();
 
@@ -17,7 +19,12 @@
 </script>
 
 {#if logoSrc}
-	<a href="/" onclick={newLogo} class="logo {position}">
+	<a
+		href="/"
+		onclick={newLogo}
+		use:sound={'logo'}
+		use:buzz={'logo'}
+		class="logo {position}">
 		<div class="logo-container">
 			<img src={logoSrc} alt="Random Logo" class="logo-image" />
 		</div>
