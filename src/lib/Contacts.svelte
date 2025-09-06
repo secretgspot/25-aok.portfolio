@@ -115,8 +115,8 @@
 		.form-input {
 			background: var(--surface-1);
 			border: none;
-			border-radius: var(--radius-3);
-			padding: var(--radius-3);
+			border-radius: var(--radius-2);
+			padding: var(--size-3);
 			height: 100%;
 			&:focus {
 				animation: pop 0.3s cubic-bezier(0.01, 0.29, 0.38, 2.37);
