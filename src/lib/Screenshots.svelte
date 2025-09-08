@@ -117,7 +117,9 @@
 			opacity 0.2s linear;
 
 		&::backdrop {
-			background: var(--surface-1);
+			/* background: var(--surface-1); */
+			background: var(--surface-1) radial-gradient(var(--surface-4) 10%, transparent 1%);
+			background-size: 9px 9px;
 		}
 	}
 
