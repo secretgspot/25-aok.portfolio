@@ -2,7 +2,7 @@
 	import Details from '#lib/Details.svelte';
 	import Iframe from '#lib/Iframe.svelte';
 	import Screenshots from '#lib/Screenshots.svelte';
-	import { primaryScreenshot } from '#lib/projects.js';
+	import { primaryScreenshot, projects } from '#lib/projects.js';
 	import { site } from '#lib/site.js';
 
 	/** @type {{ data: { project: import('#lib/projects.js').Project } }} */
@@ -12,6 +12,11 @@
 	const preview = $derived(primaryScreenshot(project));
 	const canonical = $derived(`${site.url}/${project.slug}`);
 	const ogImage = $derived(preview?.webp ? `${site.url}${preview.webp}` : null);
+	
+	// Find previous and next projects in the list
+	const currentIndex = $derived(projects.findIndex(p => p.slug === project.slug));
+	const prevProject = $derived(currentIndex > 0 ? projects[currentIndex - 1] : null);
+	const nextProject = $derived(currentIndex < projects.length - 1 ? projects[currentIndex + 1] : null);
 </script>
 
 <svelte:head>
@@ -32,6 +37,21 @@
 <nav class="back" aria-label="Breadcrumb">
 	<a href="/">← All projects</a>
 </nav>
+
+{#if prevProject || nextProject}
+	<nav class="project-nav" aria-label="Project navigation">
+		{#if prevProject}
+		<a href="/{prevProject.slug}" class="prev" aria-label="Previous project: {prevProject.title}">
+			← {prevProject.title}
+		</a>
+		{/if}
+		{#if nextProject}
+		<a href="/{nextProject.slug}" class="next" aria-label="Next project: {nextProject.title}">
+			{nextProject.title} →
+		</a>
+		{/if}
+	</nav>
+{/if}
 
 <Details {project} />
 
@@ -56,4 +76,31 @@
 	.back a:hover {
 		color: var(--text-1);
 	}
+
+.project-nav {
+	display: flex;
+	justify-content: space-between;
+	padding-inline: var(--size-4);
+	padding-block: var(--size-4);
+	font-size: var(--font-size-0);
+	color: var(--text-2);
+}
+
+.project-nav a {
+	color: inherit;
+	text-decoration: none;
+	text-underline-offset: 0.2em;
+}
+
+.project-nav a:hover {
+	color: var(--text-1);
+}
+
+.project-nav .prev {
+	margin-right: auto;
+}
+
+.project-nav .next {
+	margin-left: auto;
+}
 </style>
