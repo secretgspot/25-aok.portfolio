@@ -1,13 +1,10 @@
 <script>
 	import { primaryScreenshot } from '#lib/projects.js';
-	import Screenshot from '#lib/Screenshot.svelte';
 	import { sound } from '#lib/audio.js';
 	import { buzz } from '#lib/vibrate.js';
 
 	/** @type {{ project: import('#lib/projects.js').Project, priority?: boolean }} */
 	let { project, priority = false } = $props();
-
-	const preview = $derived(primaryScreenshot(project));
 
 	// Pointer-tracking tilt + glare. Gated to fine pointers and skipped when the
 	// user prefers reduced motion; everything else (lift, border, shadow) is CSS.
@@ -60,20 +57,7 @@
 	use:sound={'card'}
 	use:buzz={'basic'}>
 	<article class="card">
-		{#if preview}
-			<div class="media" style={`aspect-ratio: ${preview.width} / ${preview.height}`}>
-				<Screenshot
-					image={preview}
-					alt=""
-					loading={priority ? 'eager' : 'lazy'}
-					fetchpriority={priority ? 'high' : 'auto'}
-					sizes="(min-width: 64rem) 45vw, 100vw" />
-			</div>
-		{:else}
-			<div class="media fallback" aria-hidden="true">
-				<img src={project.logo} alt="" width="120" height="120" loading="lazy" decoding="async" />
-			</div>
-		{/if}
+		<div class="media"></div>
 
 		<div class="body">
 			<header>
@@ -117,10 +101,11 @@
 	.card {
 		position: relative;
 		display: grid;
+		grid-template-rows: auto 1fr auto;
 		block-size: 100%;
 		border: var(--border-size-1) solid var(--surface-4);
 		border-radius: inherit;
-		background: var(--surface-2);
+		background: var(--surface-1);
 		overflow: hidden;
 		box-shadow: var(--shadow-2);
 		--tilt-x: var(--tilt-x, 0deg); /* Use fallback */
@@ -134,14 +119,22 @@
 			transform 0.25s var(--ease-out-3);
 	}
 
-	/* Glare follows the pointer via --px/--py (set on the link, inherited here). */
+	/* Subtle screenshot as background - image path from project's primary screenshot */
+	.card .media {
+		position: absolute;
+		inset: 0;
+		background: color-mix(in oklab, var(--surface-1) 90%, var(--surface-0));
+		overflow: hidden;
+		pointer-events: none;
+	}
+
 	.card::after {
 		content: '';
 		position: absolute;
 		inset: 0;
 		background: radial-gradient(
 			circle at var(--px, 50%) var(--py, 50%),
-			rgb(255 255 255 / 0.3),
+			rgb(255 255 255 / 0.1),
 			transparent 60%
 		);
 		opacity: 0;
@@ -149,43 +142,9 @@
 		pointer-events: none;
 	}
 
-	.media {
-		aspect-ratio: 16 / 10;
-		overflow: hidden;
-		border-block-end: var(--border-size-1) solid var(--surface-4);
-		background: var(--surface-3);
-	}
-
-	.media :global(picture) {
-		display: contents;
-	}
-
-	.media :global(img) {
-		inline-size: 100%;
-		block-size: 100%;
-		object-fit: cover;
-		object-position: top center;
-		transition: scale 0.4s var(--ease-out-3);
-	}
-
-	.fallback {
-		display: grid;
-		place-items: center;
-		background:
-			radial-gradient(
-				circle at 30% 20%,
-				color-mix(in oklab, var(--brand) 28%, transparent),
-				transparent 65%
-			),
-			var(--surface-3);
-	}
-
-	.fallback img {
-		inline-size: 40%;
-		block-size: auto;
-		max-inline-size: 8rem;
-		opacity: 0.5;
-		object-fit: contain;
+	/* Glare follows the pointer via --px/--py (set on the link, inherited here). */
+	.card-link:hover .card::after {
+		opacity: 1;
 	}
 
 	.body {
@@ -193,6 +152,7 @@
 		gap: var(--size-3);
 		align-content: start;
 		padding: var(--size-4);
+		inset: auto 0 0 0; /* Position content above the background */
 	}
 
 	header {
@@ -235,12 +195,9 @@
 			box-shadow: var(--shadow-5);
 		}
 
+		/* Increase glare opacity on hover */
 		.card-link:hover .card::after {
-			opacity: 1;
-		}
-
-		.card-link:hover .media :global(img) {
-			scale: 1.03;
+			opacity: 0.3;
 		}
 
 		/* Pressed: the lift collapses and the card sinks slightly under the finger. */
@@ -265,8 +222,7 @@
 
 	@media (prefers-reduced-motion: reduce) {
 		.card,
-		.card::after,
-		.media :global(img) {
+		.card::after {
 			transition: none;
 		}
 	}

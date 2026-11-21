@@ -29,41 +29,18 @@
 </svelte:head>
 
 <section class="container">
-	<header class="intro">
-		<h1>Selected work</h1>
-		<p>Websites and apps I have designed and built. Every card opens a live deployment.</p>
-	</header>
-
 	<ul class="grid">
 		{#each projects as project, index (project.slug)}
 			<li><Card {project} priority={index === 0} /></li>
 		{/each}
 	</ul>
+	<Contacts form={data.form} />
 </section>
-
-<Contacts form={data.form} />
 
 <style>
 	.container {
 		padding-inline: var(--size-4);
-		padding-block: var(--size-6) var(--size-8);
-	}
-
-	.intro {
-		margin-block-end: var(--size-5);
-	}
-
-	.intro h1 {
-		margin: 0;
-		font-size: var(--font-size-fluid-2, clamp(2rem, 4vw + 1rem, 3.5rem));
-		text-wrap: balance;
-	}
-
-	.intro p {
-		max-inline-size: 52ch;
-		margin-block: var(--size-2) 0;
-		color: var(--text-2);
-		text-wrap: pretty;
+		padding-block: var(--size-8);
 	}
 
 	.grid {

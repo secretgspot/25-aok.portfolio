@@ -18,7 +18,7 @@
 	});
 </script>
 
-<section class="container" aria-labelledby="contact-title">
+<section class="card" aria-labelledby="contact-title" style="max-width: 24rem; width: 100%; margin-block-start: var(--size-4);">
 	{#if success}
 		<div class="success" role="status" tabindex="-1" bind:this={successPanel}>
 			<p class="eyebrow">Message sent</p>
@@ -122,72 +122,70 @@
 </section>
 
 <style>
-	.container {
-		padding-block: var(--size-6) var(--size-8);
-		padding-inline: var(--size-4);
-		border-block-start: var(--border-size-1) solid var(--surface-4);
+	.card {
+		--radius: var(--radius-2);
 	}
 
 	.title,
 	.success h2 {
-		font-size: var(--font-size-4);
-		margin-block: 0 var(--size-4);
+		font-size: clamp(1.2rem, 3vw + 0.8rem, 1.5rem);
+		margin-block: 0 var(--size-2);
 		text-wrap: balance;
+		color: var(--text-2);
 	}
 
 	.contact-form {
-		display: grid;
-		gap: var(--size-4);
-		max-inline-size: 38rem;
-		padding: var(--size-4);
-		border: var(--border-size-1) solid var(--border-1);
-		border-radius: var(--radius-3);
-		background: var(--surface-3);
+		padding: var(--size-2);
+		gap: var(--size-2);
+		max-inline-size: none;
 	}
 
 	.field {
 		display: grid;
-		gap: var(--size-1);
+		gap: calc(var(--size-1) * 0.5);
+		margin-block: calc(var(--size-2) * 0.5);
 	}
 
 	label {
-		font-size: var(--font-size-0);
-		font-weight: 600;
+		font-size: calc(var(--font-size-0) * 0.8);
+		color: var(--muted);
+		font-weight: 400;
 	}
 
 	input,
 	textarea {
 		inline-size: 100%;
-		padding: var(--size-3);
-		border: var(--border-size-1) solid var(--border-1);
+		padding: calc(var(--size-3) * 0.5);
+		border: 1px solid var(--border-1);
 		border-radius: var(--radius-2);
 		background: var(--surface-1);
-		color: var(--text-1);
-		font: inherit;
+		color: var(--text-2);
+		font: calc(var(--font-size-0) * 0.8) inherit;
+		font-size: inherit;
 		field-sizing: content;
-		min-block-size: 3rem;
+		min-block-size: 2rem;
 	}
 
 	textarea {
-		min-block-size: 9rem;
+		min-block-size: 6rem;
 		resize: vertical;
 	}
 
 	input:user-invalid,
 	textarea:user-invalid {
-		border-color: var(--color-red);
+		border-color: color-mix(in oklab, var(--color-red) 20%, transparent);
 	}
 
 	input:focus-visible,
 	textarea:focus-visible {
-		outline: 3px solid var(--accent);
-		outline-offset: 2px;
+		outline: 1px solid var(--accent);
+		outline-offset: 0.5px;
 	}
 
 	.hint {
 		margin: 0;
-		color: var(--text-2);
-		font-size: var(--font-size-0);
+		color: var(--muted);
+		font-size: calc(var(--font-size-0) * 0.7);
 	}
 
 	.honeypot {
@@ -201,65 +199,62 @@
 
 	.error {
 		margin: 0;
-		padding: var(--size-2) var(--size-3);
-		border-inline-start: var(--border-size-3) solid var(--color-red);
-		background: color-mix(in oklab, var(--color-red) 12%, transparent);
+		padding: calc(var(--size-2) * 0.5) calc(var(--size-3) * 0.5);
+		border-inline-start: var(--border-size-1) solid color-mix(in oklab, var(--color-red) 15%, transparent);
+		background: color-mix(in oklab, var(--color-red) 10%, transparent);
 	}
 
 	.actions {
 		display: flex;
 		justify-content: flex-end;
+		gap: calc(var(--size-3) * 0.5);
 	}
 
 	button {
-		min-inline-size: 12ch;
-		min-block-size: 2.75rem;
-		padding-inline: var(--size-4);
+		min-inline-size: initial;
+		min-block-size: initial;
+		padding-inline: calc(var(--size-4) * 0.5);
 		border: none;
 		border-radius: var(--radius-2);
-		background: var(--brand);
-		color: var(--surface-1);
-		font: inherit;
+		background: none;
+		color: white;
+		font: calc(var(--font-size-0) * 0.8) inherit;
 		font-weight: 600;
+		box-shadow: none;
+		transition: translate 0.15s var(--ease-out-3);
 		cursor: pointer;
-		box-shadow: 0 2px 0 0 color-mix(in oklab, var(--brand) 70%, black);
-		transition:
-			translate 0.15s var(--ease-out-3),
-			box-shadow 0.15s;
 	}
 
 	button:hover:not(:disabled) {
-		translate: 0 -1px;
-		box-shadow: 0 3px 0 0 color-mix(in oklab, var(--brand) 70%, black);
+		translate: 0 - calc(var(--size-1) * 0.3);
 	}
 
 	button:active:not(:disabled) {
-		translate: 0 1px;
+		translate: 0 calc(var(--size-1) * 0.3);
 		box-shadow: none;
 	}
 
 	button:disabled {
 		cursor: progress;
-		opacity: 0.7;
+		opacity: 0.3;
 	}
 
 	.success {
-		max-inline-size: 38rem;
-		padding: var(--size-5);
-		border: var(--border-size-1) solid var(--border-1);
-		border-radius: var(--radius-3);
-		background: var(--surface-3);
+		padding: calc(var(--size-2) * 0.5);
+		border: none;
+		border-radius: var(--radius-2);
+		background: color-mix(in oklab, var(--surface-1) 98%, transparent);
 	}
 
 	.eyebrow {
-		margin: 0 0 var(--size-1);
-		color: var(--text-2);
-		font-size: var(--font-size-0);
-		letter-spacing: 0.08em;
+		margin: 0 0 calc(var(--size-1) * 0.5);
+		color: var(--muted);
+		font-size: calc(var(--font-size-0) * 0.7);
+		letter-spacing: 0.04em;
 		text-transform: uppercase;
 	}
 
 	.again {
-		margin-block-start: var(--size-4);
+		margin-block-start: calc(var(--size-2) * 0.5);
 	}
 </style>
