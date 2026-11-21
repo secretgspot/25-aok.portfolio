@@ -217,12 +217,13 @@
 		border: none;
 		border-radius: var(--radius-2);
 		background: none;
-		color: white;
+		color: var(--text);
 		font: calc(var(--font-size-0) * 0.8) inherit;
 		font-weight: 600;
 		box-shadow: none;
 		transition: translate 0.15s var(--ease-out-3);
 		cursor: pointer;
+		text-shadow: 0 1px 2px color-mix(in oklab, black 20%, transparent);
 	}
 
 	button:hover:not(:disabled) {

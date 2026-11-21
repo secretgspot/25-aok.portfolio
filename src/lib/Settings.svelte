@@ -14,7 +14,6 @@
 
 <!-- Opened by the header logo, which carries popovertarget="site-settings". -->
 <div id="site-settings" popover class="panel" aria-labelledby="settings-title">
-	<h2 id="settings-title">Settings</h2>
 
 	<fieldset>
 		<legend>Theme</legend>
@@ -25,6 +24,8 @@
 			</label>
 		{/each}
 	</fieldset>
+
+	<div style="margin-block-start: calc(var(--size-3) * 1.5);"></div>
 
 	<label class="switch">
 		<input type="checkbox" bind:checked={settings.sound} />
@@ -40,25 +41,20 @@
 <style>
 	.panel {
 		inset: auto;
-		inset-block-start: 5.5rem;
+		inset-block-start: var(--size-4);
 		inset-inline-end: var(--size-4);
 		margin: 0;
-		padding: var(--size-4);
+		padding: var(--size-3);
 		border: var(--border-size-1) solid var(--border-1);
-		border-radius: var(--radius-3);
-		background: var(--surface-2);
-		color: var(--text-1);
-		box-shadow: var(--shadow-5);
+		border-radius: var(--radius-2);
+		background: var(--surface-1);
+		color: var(--text-2);
+		box-shadow: none;
 	}
 
 	.panel:popover-open {
 		display: grid;
-		gap: var(--size-3);
-	}
-
-	.panel h2 {
-		margin: 0;
-		font-size: var(--font-size-1);
+		gap: calc(var(--size-1) * 0.5);
 	}
 
 	fieldset {
@@ -67,46 +63,58 @@
 		margin: 0;
 		padding: 0;
 		border: none;
+		cursor: pointer;
 	}
 
 	legend {
 		padding: 0;
-		margin-block-end: var(--size-1);
-		color: var(--text-2);
-		font-size: var(--font-size-0);
+		margin-block-end: calc(var(--size-1) * 0.5);
+		color: var(--muted);
+		font-size: calc(var(--font-size-0) * 0.8);
 	}
 
 	fieldset label,
 	.switch {
 		display: flex;
 		align-items: center;
-		gap: var(--size-2);
+		gap: calc(var(--size-1) * 0.5);
 		cursor: pointer;
-		font-size: var(--font-size-0);
+		font-size: calc(var(--font-size-0) * 0.8);
 	}
 
 	fieldset label {
-		padding: var(--size-1) var(--size-3);
-		border: var(--border-size-1) solid var(--border-1);
-		border-radius: var(--radius-2);
+		padding: calc(var(--size-1) * 0.5) calc(var(--size-2) * 0.5);
+		border: var(--border-size-0) solid;
+		border-radius: var(--radius);
+		background: none;
+		color: var(--muted);
+		cursor: pointer;
+	}
+
+	fieldset label span {
+		cursor: pointer;
+		display: inline;
 	}
 
 	fieldset input {
 		position: absolute;
 		opacity: 0;
+		cursor: pointer;
 	}
 
 	fieldset input:checked + span {
-		font-weight: 700;
+		font-weight: 600;
+		color: var(--text);
 	}
 
 	fieldset label:has(input:checked) {
-		border-color: var(--brand);
-		background: color-mix(in oklab, var(--brand) 12%, transparent);
+		border-color: color-mix(in oklab, var(--brand) 80%, transparent);
+		background: color-mix(in oklab, var(--brand) 10%, transparent);
+		color: var(--text);
 	}
 
 	fieldset input:focus-visible + span {
-		outline: 2px solid var(--accent);
-		outline-offset: 2px;
+		outline: 1px solid var(--accent);
+		outline-offset: 0.5px;
 	}
 </style>
