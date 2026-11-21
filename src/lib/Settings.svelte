@@ -1,7 +1,5 @@
 <script>
 	import { applyTheme, settings } from '#lib/feedback.svelte.js';
-	import { sound } from '#lib/audio.js';
-	import { buzz } from '#lib/vibrate.js';
 
 	const themes = [
 		{ value: 'system', label: 'System' },
@@ -14,19 +12,7 @@
 	});
 </script>
 
-<button
-	type="button"
-	class="trigger"
-	popovertarget="site-settings"
-	aria-label="Site settings"
-	use:sound={'tick'}
-	use:buzz={'tick'}>
-	<svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8">
-		<circle cx="12" cy="12" r="3.2" />
-		<path d="M19.4 15a1.7 1.7 0 0 0 .34 1.87l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.7 1.7 0 0 0-1.87-.34 1.7 1.7 0 0 0-1.03 1.56V21a2 2 0 1 1-4 0v-.09a1.7 1.7 0 0 0-1.11-1.56 1.7 1.7 0 0 0-1.87.34l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06A1.7 1.7 0 0 0 4.6 15a1.7 1.7 0 0 0-1.56-1.03H3a2 2 0 1 1 0-4h.09A1.7 1.7 0 0 0 4.65 8.9a1.7 1.7 0 0 0-.34-1.87l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06A1.7 1.7 0 0 0 9 4.6a1.7 1.7 0 0 0 1.03-1.56V3a2 2 0 1 1 4 0v.09A1.7 1.7 0 0 0 15.1 4.6a1.7 1.7 0 0 0 1.87-.34l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06A1.7 1.7 0 0 0 19.4 9c.2.6.77 1.02 1.42 1.03H21a2 2 0 1 1 0 4h-.09a1.7 1.7 0 0 0-1.51 1.03Z" />
-	</svg>
-</button>
-
+<!-- Opened by the header logo, which carries popovertarget="site-settings". -->
 <div id="site-settings" popover class="panel" aria-labelledby="settings-title">
 	<h2 id="settings-title">Settings</h2>
 
@@ -52,22 +38,6 @@
 </div>
 
 <style>
-	.trigger {
-		display: grid;
-		place-content: center;
-		inline-size: 2.75rem;
-		block-size: 2.75rem;
-		border: var(--border-size-1) solid var(--border-1);
-		border-radius: 50%;
-		background: var(--surface-2);
-		color: var(--text-1);
-		cursor: pointer;
-	}
-
-	.trigger:hover {
-		border-color: var(--brand);
-	}
-
 	.panel {
 		inset: auto;
 		inset-block-start: 5.5rem;

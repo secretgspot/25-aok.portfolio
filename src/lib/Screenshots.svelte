@@ -46,12 +46,13 @@
 	<section class="screenshots" aria-labelledby="screenshots-title">
 		<h2 id="screenshots-title">Screenshots</h2>
 
-		<ul class="grid">
+		<ul class="masonry">
 			{#each images as image, i (image.name)}
 				<li>
 					<button
 						type="button"
 						class="shot"
+						style={`aspect-ratio: ${image.width} / ${image.height}`}
 						onclick={() => open(i)}
 						use:sound={'screenshot'}
 						use:buzz={'screenshot'}>
@@ -111,20 +112,37 @@
 		font-size: var(--font-size-3);
 	}
 
-	.grid {
-		display: grid;
-		grid-template-columns: repeat(auto-fit, minmax(min(100%, 18rem), 1fr));
+	/* Masonry via CSS columns: each shot keeps its own aspect ratio (set inline
+	   from the manifest), so portrait tablet/mobile captures are never cropped. */
+	.masonry {
+		columns: 1;
 		gap: var(--size-3);
 		margin: 0;
 		padding: 0;
 		list-style: none;
 	}
 
+	@media (min-width: 40rem) {
+		.masonry {
+			columns: 2;
+		}
+	}
+
+	@media (min-width: 64rem) {
+		.masonry {
+			columns: 3;
+		}
+	}
+
+	.masonry li {
+		break-inside: avoid;
+		margin-block-end: var(--size-3);
+	}
+
 	.shot {
 		position: relative;
 		display: block;
 		inline-size: 100%;
-		aspect-ratio: 16 / 10;
 		padding: 0;
 		border: var(--border-size-2) solid var(--border-1);
 		border-radius: var(--radius-3);

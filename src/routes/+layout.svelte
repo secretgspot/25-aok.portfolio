@@ -42,10 +42,12 @@
 </main>
 
 <style>
+	/* Only the logo takes layout space (the settings popover is display:none
+	   while closed), so a single child sits at the end of the row. */
 	.site-header {
 		display: flex;
 		align-items: start;
-		justify-content: space-between;
+		justify-content: flex-end;
 		padding: var(--size-3) var(--size-4) 0;
 	}
 

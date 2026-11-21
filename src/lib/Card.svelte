@@ -8,17 +8,60 @@
 	let { project, priority = false } = $props();
 
 	const preview = $derived(primaryScreenshot(project));
+
+	// Pointer-tracking tilt + glare. Gated to fine pointers and skipped when the
+	// user prefers reduced motion; everything else (lift, border, shadow) is CSS.
+	/** @type {{ fine: boolean, reduced: boolean } | null} */
+	let capabilities = null;
+
+	function caps() {
+		if (!capabilities) {
+			capabilities = {
+				fine: window.matchMedia('(hover: hover) and (pointer: fine)').matches,
+				reduced: window.matchMedia('(prefers-reduced-motion: reduce)').matches
+			};
+		}
+
+		return capabilities;
+	}
+
+	/** @param {PointerEvent} event */
+	function onPointerMove(event) {
+		if (!caps().fine || caps().reduced) return;
+
+		const el = /** @type {HTMLElement} */ (event.currentTarget);
+		const rect = el.getBoundingClientRect();
+		const x = (event.clientX - rect.left) / rect.width;
+		const y = (event.clientY - rect.top) / rect.height;
+
+		// "Pressed at the cursor": the point under the pointer recedes, so the
+		// tilt is positive above/left of center and negative below/right.
+		el.style.setProperty('--tilt-x', `${((0.5 - y) * 8).toFixed(2)}deg`);
+		el.style.setProperty('--tilt-y', `${((x - 0.5) * 10).toFixed(2)}deg`);
+		el.style.setProperty('--px', `${(x * 100).toFixed(1)}%`);
+		el.style.setProperty('--py', `${(y * 100).toFixed(1)}%`);
+	}
+
+	/** @param {PointerEvent} event */
+	function onPointerLeave(event) {
+		const el = /** @type {HTMLElement} */ (event.currentTarget);
+		for (const name of ['--tilt-x', '--tilt-y', '--px', '--py']) {
+			el.style.removeProperty(name);
+		}
+	}
 </script>
 
 <a
 	href="/{project.slug}"
 	class="card-link"
 	style="--vt-name: project-{project.slug}"
+	onpointermove={onPointerMove}
+	onpointerleave={onPointerLeave}
 	use:sound={'card'}
 	use:buzz={'basic'}>
 	<article class="card">
 		{#if preview}
-			<div class="media">
+			<div class="media" style={`aspect-ratio: ${preview.width} / ${preview.height}`}>
 				<Screenshot
 					image={preview}
 					alt=""
@@ -68,9 +111,11 @@
 		border-radius: var(--radius-3);
 		container-type: inline-size;
 		view-transition-name: var(--vt-name);
+		perspective: 1100px;
 	}
 
 	.card {
+		position: relative;
 		display: grid;
 		block-size: 100%;
 		border: var(--border-size-1) solid var(--surface-4);
@@ -78,10 +123,30 @@
 		background: var(--surface-2);
 		overflow: hidden;
 		box-shadow: var(--shadow-2);
+		--tilt-x: var(--tilt-x, 0deg); /* Use fallback */
+		--tilt-y: var(--tilt-y, 0deg); /* Use fallback */
+		transform: rotateX(var(--tilt-x)) rotateY(var(--tilt-y));
 		transition:
 			translate 0.3s var(--ease-out-3),
+			scale 0.15s var(--ease-out-3),
 			box-shadow 0.3s var(--ease-out-3),
-			border-color 0.3s;
+			border-color 0.3s,
+			transform 0.25s var(--ease-out-3);
+	}
+
+	/* Glare follows the pointer via --px/--py (set on the link, inherited here). */
+	.card::after {
+		content: '';
+		position: absolute;
+		inset: 0;
+		background: radial-gradient(
+			circle at var(--px, 50%) var(--py, 50%),
+			rgb(255 255 255 / 0.3),
+			transparent 60%
+		);
+		opacity: 0;
+		transition: opacity 0.3s var(--ease-out-3);
+		pointer-events: none;
 	}
 
 	.media {
@@ -170,8 +235,19 @@
 			box-shadow: var(--shadow-5);
 		}
 
+		.card-link:hover .card::after {
+			opacity: 1;
+		}
+
 		.card-link:hover .media :global(img) {
 			scale: 1.03;
+		}
+
+		/* Pressed: the lift collapses and the card sinks slightly under the finger. */
+		.card-link:active .card {
+			translate: 0 -1px;
+			scale: 0.985;
+			box-shadow: var(--shadow-3);
 		}
 	}
 
@@ -184,6 +260,14 @@
 		header {
 			flex-direction: column;
 			align-items: flex-start;
+		}
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+		.card,
+		.card::after,
+		.media :global(img) {
+			transition: none;
 		}
 	}
 </style>
