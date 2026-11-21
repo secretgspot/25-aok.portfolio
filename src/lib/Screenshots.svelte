@@ -90,7 +90,8 @@
 				src={images[index].webp ?? images[index].avif}
 				alt={images[index].alt}
 				width={images[index].width}
-				height={images[index].height} />
+				height={images[index].height}
+				style={`aspect-ratio: ${images[index].width} / ${images[index].height}`} />
 		</picture>
 
 		<div class="controls">
@@ -218,6 +219,7 @@
 		margin-inline: auto;
 		border-radius: var(--radius-3);
 		box-shadow: var(--shadow-6);
+		object-fit: contain;
 	}
 
 	.controls {
