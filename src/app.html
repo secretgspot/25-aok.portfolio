@@ -4,7 +4,21 @@
 <head>
 	<meta charset="utf-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
-	<link rel="stylesheet" href="%sveltekit.assets%/css/style.css">
+	<meta name="color-scheme" content="light dark" />
+	<link rel="stylesheet" href="%sveltekit.assets%/css/style.css" />
+
+	<script>
+		// Restore the saved theme before first paint to avoid a flash.
+		try {
+			const theme = JSON.parse(localStorage.getItem('aok:settings') || '{}').theme;
+			if (theme === 'light' || theme === 'dark') {
+				document.documentElement.dataset.theme = theme;
+			}
+		} catch {
+			// Ignore unavailable storage.
+		}
+	</script>
+
 	%sveltekit.head%
 
 	<!-- Google tag (gtag.js) -->
@@ -13,7 +27,6 @@
 		window.dataLayer = window.dataLayer || [];
 		function gtag() { dataLayer.push(arguments); }
 		gtag('js', new Date());
-
 		gtag('config', 'G-TBC8048MS5');
 	</script>
 </head>

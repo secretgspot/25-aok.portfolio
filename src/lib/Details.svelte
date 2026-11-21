@@ -1,89 +1,125 @@
 <script>
+	/** @type {{ project: import('#lib/projects.js').Project }} */
 	let { project } = $props();
+
+	const host = $derived(new URL(project.url).host);
 </script>
 
-<aside class="details">
-	<div class="details-wrap">
-		<img src={project.logo} alt="logo" class="client-logo" />
-		{#if project.details}
-			<div>
-				<p class="client"><small>Client:</small> {project.details.client}</p>
-				<p class="year"><small>Year:</small> {project.details.year}</p>
-				<p class="tech"><small>Tech:</small> {project.details.technologies.join(', ')}</p>
-				<p class="url">
-					<small>URL:</small>
-					<a href={project.url} target="_blank" rel="noopener noreferrer"
-						>{project.url}</a>
-				</p>
-			</div>
-		{/if}
+<aside class="details" aria-labelledby="project-title">
+	<div class="intro">
+		<div class="head">
+			{#if project.logo}
+				<img src={project.logo} alt="" class="client-logo" width="56" height="56" decoding="async" />
+			{/if}
+			<h1 id="project-title">{project.title}</h1>
+		</div>
+
+		<p class="summary">{project.summary}</p>
 	</div>
 
-	<p class="summary">{project.summary}</p>
+	{#if project.details}
+		<dl>
+			{#if project.details.client}
+				<div><dt>Client</dt><dd>{project.details.client}</dd></div>
+			{/if}
+			{#if project.details.year}
+				<div><dt>Year</dt><dd>{project.details.year}</dd></div>
+			{/if}
+			{#if project.details.technologies?.length}
+				<div><dt>Tech</dt><dd>{project.details.technologies.join(', ')}</dd></div>
+			{/if}
+			<div>
+				<dt>URL</dt>
+				<dd>
+					<a href={project.url} target="_blank" rel="noopener noreferrer">{host}</a>
+				</dd>
+			</div>
+		</dl>
+	{/if}
 </aside>
 
 <style>
 	.details {
-		/* border: var(--border-size-3) double var(--surface-1); */
-		border: none;
-		border-radius: var(--radius-3);
-		padding: var(--size-3);
-		margin-inline: var(--size-3);
 		display: grid;
-
-		align-self: start;
-		gap: var(--size-1);
+		gap: var(--size-5);
+		margin-inline: var(--size-4);
+		padding: var(--size-5);
+		border-radius: var(--radius-3);
 		background: var(--brand);
 		color: var(--surface-1);
+	}
 
-		/* Small tablets and larger mobile devices (481px - 768px) */
-		@media (min-width: 481px) {
-			width: min-content;
-		}
+	.intro {
+		display: grid;
+		gap: var(--size-3);
+		align-content: start;
+	}
 
-		/* Tablets and small laptops (769px - 1024px) */
-		@media (min-width: 769px) {
-		}
+	.head {
+		display: flex;
+		align-items: center;
+		gap: var(--size-3);
+	}
 
-		/* Large desktops and high-resolution screens (1025px and up) */
-		@media (min-width: 1025px) {
-		}
+	.client-logo {
+		flex: none;
+		inline-size: 56px;
+		block-size: 56px;
+		object-fit: contain;
+	}
 
-		/* Extra-large screens (1440px and up) */
-		@media (min-width: 1440px) {
-		}
+	h1 {
+		margin: 0;
+		font-size: var(--font-size-4);
+		text-wrap: balance;
+	}
 
-		.details-wrap {
-			display: grid;
-			grid-template-columns: 60px 1fr;
-			gap: var(--size-3);
-			.client-logo {
-				width: 100%;
-				height: 100%;
-			}
+	dl {
+		display: grid;
+		gap: var(--size-2);
+		align-content: start;
+		margin: 0;
+		padding: 0;
+	}
 
-			p {
-				margin-block: 0;
-				small {
-					color: var(--text-2);
-				}
-				a {
-					color: var(--surface-1);
-					&:hover {
-						color: var(--blue-6);
-					}
-				}
-			}
-		}
+	dl div {
+		display: flex;
+		flex-wrap: wrap;
+		gap: var(--size-2);
+	}
 
-		/* p {
-			margin-inline: var(--size-3);
-		} */
+	dt {
+		min-inline-size: 5ch;
+		color: color-mix(in oklab, var(--surface-1) 74%, transparent);
+		font-size: var(--font-size-0);
+		text-transform: uppercase;
+		letter-spacing: 0.05em;
+	}
 
-		.url {
-			@media (min-width: 481px) {
-				white-space: nowrap;
-			}
+	dd {
+		margin: 0;
+	}
+
+	a {
+		color: inherit;
+		text-underline-offset: 0.2em;
+	}
+
+	a:hover {
+		text-decoration-thickness: 2px;
+	}
+
+	.summary {
+		margin: 0;
+		font-size: var(--font-size-1);
+		text-wrap: pretty;
+	}
+
+	@media (min-width: 48rem) {
+		.details {
+			grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr);
+			gap: var(--size-6);
+			padding: var(--size-6);
 		}
 	}
 </style>

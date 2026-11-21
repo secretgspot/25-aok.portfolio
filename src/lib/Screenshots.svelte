@@ -1,153 +1,256 @@
 <script>
-	import { sound } from '$lib/audio.js';
-	import { buzz } from '$lib/vibrate.js';
-	let { screenshots, max = Infinity, popover = false } = $props();
+	import { screenshotList } from '#lib/projects.js';
+	import Screenshot from '#lib/Screenshot.svelte';
+	import { sound } from '#lib/audio.js';
+	import { buzz } from '#lib/vibrate.js';
+
+	/** @type {{ project: import('#lib/projects.js').Project }} */
+	let { project } = $props();
+
+	const images = $derived(screenshotList(project));
+
+	/** @type {number} */
+	let index = $state(-1);
+	/** @type {HTMLDialogElement | undefined} */
+	let dialog = $state();
+
+	/** @param {number} next */
+	function open(next) {
+		index = next;
+		dialog?.showModal();
+	}
+
+	function close() {
+		dialog?.close();
+	}
+
+	/** @param {number} delta */
+	function step(delta) {
+		if (!images.length) return;
+		index = (index + delta + images.length) % images.length;
+	}
+
+	/** @param {KeyboardEvent} event */
+	function onKeydown(event) {
+		if (event.key === 'ArrowRight') step(1);
+		if (event.key === 'ArrowLeft') step(-1);
+	}
+
+	/** @param {MouseEvent} event */
+	function lightDismiss(event) {
+		if (event.target === dialog) close();
+	}
 </script>
 
-<section class="screenshots">
-	<h2>Screenshots</h2>
+{#if images.length}
+	<section class="screenshots" aria-labelledby="screenshots-title">
+		<h2 id="screenshots-title">Screenshots</h2>
 
-	{#if screenshots && screenshots.length > 0}
-		<div class="screenshots-grid">
-			{#each screenshots.slice(0, max) as screenshot, i}
-				<div class="screenshot-item" data-title={screenshot.title}>
-					{#if popover}
-						<button
-							popovertarget="popover-{i}"
-							use:sound={'screenshot'}
-							use:buzz={'screenshot'}
-							class="popover-button">
-							<img src={screenshot.url} alt="Screenshot" class="screenshot-image" />
-						</button>
-						<div popover id="popover-{i}" class="popover-content">
-							<button
-								popovertarget="popover-{i}"
-								popovertargetaction="hide"
-								use:sound={'swipe'}
-								use:buzz={'close'}
-								class="close-button">
-								❌
-							</button>
-							<img src={screenshot.url} alt="Screenshot" class="popover-image" />
-						</div>
-					{:else}
-						<img src={screenshot.url} alt="Screenshot" class="screenshot-image" />
-					{/if}
-				</div>
+		<ul class="grid">
+			{#each images as image, i (image.name)}
+				<li>
+					<button
+						type="button"
+						class="shot"
+						onclick={() => open(i)}
+						use:sound={'screenshot'}
+						use:buzz={'screenshot'}>
+						<Screenshot
+							{image}
+							alt={image.alt}
+							sizes="(min-width: 64rem) 30vw, (min-width: 40rem) 45vw, 100vw" />
+						<span class="caption">{image.name.replace('-', ' ')}</span>
+					</button>
+				</li>
 			{/each}
+		</ul>
+	</section>
+{/if}
+
+<dialog
+	bind:this={dialog}
+	class="lightbox"
+	aria-labelledby="lightbox-title"
+	onkeydown={onKeydown}
+	onclose={() => (index = -1)}
+	onclick={lightDismiss}
+	{...{ closedby: 'any' }}>
+	{#if index >= 0 && images[index]}
+		<h2 id="lightbox-title" class="visually-hidden">{images[index].alt}</h2>
+
+		<picture>
+			{#if images[index].avif}
+				<source type="image/avif" srcset={images[index].avif} />
+			{/if}
+			{#if images[index].webp}
+				<source type="image/webp" srcset={images[index].webp} />
+			{/if}
+			<img
+				src={images[index].webp ?? images[index].avif}
+				alt={images[index].alt}
+				width={images[index].width}
+				height={images[index].height} />
+		</picture>
+
+		<div class="controls">
+			<button type="button" onclick={() => step(-1)} aria-label="Previous screenshot">←</button>
+			<p aria-live="polite">{index + 1} / {images.length}</p>
+			<button type="button" onclick={() => step(1)} aria-label="Next screenshot">→</button>
+			<button type="button" class="close" onclick={close} aria-label="Close">✕</button>
 		</div>
-	{:else}
-		<p>No screenshots available.</p>
 	{/if}
-</section>
+</dialog>
 
 <style>
 	.screenshots {
-		margin-inline: var(--size-3);
+		margin-inline: var(--size-4);
+		margin-block: var(--size-8);
 	}
-	.screenshots-grid {
+
+	h2 {
+		font-size: var(--font-size-3);
+	}
+
+	.grid {
 		display: grid;
-		grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+		grid-template-columns: repeat(auto-fit, minmax(min(100%, 18rem), 1fr));
 		gap: var(--size-3);
+		margin: 0;
+		padding: 0;
+		list-style: none;
+	}
 
-		/* Tablet and larger */
-		@media (min-width: 768px) {
-			grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-		}
+	.shot {
+		position: relative;
+		display: block;
+		inline-size: 100%;
+		aspect-ratio: 16 / 10;
+		padding: 0;
+		border: var(--border-size-2) solid var(--border-1);
+		border-radius: var(--radius-3);
+		background: var(--surface-3);
+		overflow: hidden;
+		cursor: pointer;
+		transition:
+			border-color 0.2s,
+			translate 0.2s var(--ease-out-3);
+	}
 
-		/* Desktop and larger */
-		@media (min-width: 1024px) {
-			grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-		}
+	.shot :global(picture) {
+		display: contents;
+	}
 
-		.screenshot-item {
-			position: relative;
-			overflow: hidden;
-			border: var(--border-size-2) solid var(--brand);
-			border-radius: var(--radius-drawn-3);
-			box-shadow: var(--shadow-2);
-			aspect-ratio: 1;
-			&::before {
-				content: attr(data-title);
-				color: var(--text-1);
-				position: absolute;
-				font-size: small;
-				background: var(--surface-1);
-				padding: var(--size-1) var(--size-2);
-				margin: var(--size-1);
-				border-radius: var(--radius-drawn-1);
-			}
-			&:hover {
-				animation: pop 0.3s cubic-bezier(0.01, 0.29, 0.38, 2.37);
-			}
+	.shot :global(img) {
+		inline-size: 100%;
+		block-size: 100%;
+		object-fit: cover;
+		object-position: top center;
+	}
 
-			.screenshot-image {
-				width: 100%;
-				height: 100%;
-				display: block;
-				object-fit: contain;
-			}
+	.caption {
+		position: absolute;
+		inset-block-end: 0;
+		inset-inline: 0;
+		padding: var(--size-4) var(--size-3) var(--size-2);
+		background: linear-gradient(
+			to top,
+			color-mix(in oklab, var(--surface-1) 88%, transparent),
+			transparent
+		);
+		color: var(--text-1);
+		font-size: var(--font-size-0);
+		text-align: start;
+		text-transform: capitalize;
+		text-shadow: 0 1px 2px var(--surface-1);
+	}
+
+	@media (hover: hover) and (pointer: fine) {
+		.shot:hover {
+			border-color: var(--brand);
+			translate: 0 -2px;
 		}
 	}
 
-	@keyframes pop {
-		50% {
-			transform: scale(1.01);
-		}
-	}
-
-	.popover-button {
+	.lightbox {
+		max-inline-size: min(96vw, 1400px);
+		max-block-size: 92dvh;
 		padding: 0;
 		border: none;
-		background: none;
-		cursor: pointer;
-		width: 100%;
-		height: 100%;
+		background: transparent;
+		overflow: visible;
 	}
 
-	.popover-content {
-		border: var(--border-size-5) solid var(--brand);
-		border-radius: var(--radius-drawn-4);
-		padding: 0;
-		background: none;
-		max-width: 90vw;
-		max-height: 90vh;
-		transition:
-			transform 0.3s cubic-bezier(0.01, 0.29, 0.38, 2.37),
-			opacity 0.2s linear;
+	.lightbox:modal {
+		overscroll-behavior: contain;
+	}
 
-		&::backdrop {
-			/* background: var(--surface-1); */
-			background: var(--surface-1) radial-gradient(var(--surface-4) 10%, transparent 1%);
-			background-size: 9px 9px;
-		}
+	.lightbox::backdrop {
+		background: color-mix(in oklab, var(--surface-1) 82%, transparent);
+		backdrop-filter: blur(8px);
+		overscroll-behavior: contain;
+	}
+
+	.lightbox picture {
+		display: contents;
+	}
+
+	.lightbox img {
+		max-inline-size: 100%;
+		max-block-size: 80dvh;
+		margin-inline: auto;
+		border-radius: var(--radius-3);
+		box-shadow: var(--shadow-6);
+	}
+
+	.controls {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		gap: var(--size-3);
+		margin-block-start: var(--size-3);
+		color: var(--text-1);
+	}
+
+	.controls button {
+		inline-size: 2.75rem;
+		block-size: 2.75rem;
+		border: var(--border-size-1) solid var(--border-1);
+		border-radius: 50%;
+		background: var(--surface-2);
+		color: var(--text-1);
+		cursor: pointer;
+	}
+
+	.controls .close {
+		margin-inline-start: var(--size-5);
+	}
+
+	.controls p {
+		margin: 0;
+		font-variant-numeric: tabular-nums;
 	}
 
 	@starting-style {
-		.popover-content {
+		.lightbox[open] {
 			opacity: 0;
-			transform: scale(0.95);
+			translate: 0 1rem;
 		}
 	}
 
-	.popover-image {
-		width: 100%;
-		height: 100%;
-		object-fit: contain;
+	.lightbox[open] {
+		animation: enter 0.25s var(--ease-out-3);
 	}
 
-	.close-button {
-		position: fixed;
-		top: 1rem;
-		right: 1rem;
-		background: var(--surface-1);
-		border: var(--border-size-2) solid var(--surface-4);
-		border-radius: 50%;
-		width: 2rem;
-		height: 2rem;
-		display: grid;
-		place-content: center;
-		cursor: pointer;
-		z-index: 1;
+	@keyframes enter {
+		from {
+			opacity: 0;
+			translate: 0 1rem;
+		}
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+		.lightbox[open] {
+			animation: none;
+		}
 	}
 </style>

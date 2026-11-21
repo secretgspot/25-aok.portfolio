@@ -1,0 +1,125 @@
+{
+	"generatedAt": "2026-11-20T23:17:02.158Z",
+	"projects": {
+		"cariari-pintor": {
+			"desktop": {
+				"webp": "/screenshots/cariari-pintor/desktop.webp",
+				"avif": "/screenshots/cariari-pintor/desktop.avif",
+				"width": 1440,
+				"height": 900,
+				"alt": "Cariari Pintor — desktop view"
+			},
+			"desktop-full": {
+				"webp": "/screenshots/cariari-pintor/desktop-full.webp",
+				"avif": "/screenshots/cariari-pintor/desktop-full.avif",
+				"width": 1200,
+				"height": 3374,
+				"alt": "Cariari Pintor — desktop full view"
+			},
+			"tablet": {
+				"webp": "/screenshots/cariari-pintor/tablet.webp",
+				"avif": "/screenshots/cariari-pintor/tablet.avif",
+				"width": 834,
+				"height": 1112,
+				"alt": "Cariari Pintor — tablet view"
+			},
+			"mobile": {
+				"webp": "/screenshots/cariari-pintor/mobile.webp",
+				"avif": "/screenshots/cariari-pintor/mobile.avif",
+				"width": 390,
+				"height": 844,
+				"alt": "Cariari Pintor — mobile view"
+			}
+		},
+		"cariari-community": {
+			"desktop": {
+				"webp": "/screenshots/cariari-community/desktop.webp",
+				"avif": "/screenshots/cariari-community/desktop.avif",
+				"width": 1440,
+				"height": 900,
+				"alt": "Cariari Community — desktop view"
+			},
+			"desktop-full": {
+				"webp": "/screenshots/cariari-community/desktop-full.webp",
+				"avif": "/screenshots/cariari-community/desktop-full.avif",
+				"width": 1200,
+				"height": 1569,
+				"alt": "Cariari Community — desktop full view"
+			},
+			"tablet": {
+				"webp": "/screenshots/cariari-community/tablet.webp",
+				"avif": "/screenshots/cariari-community/tablet.avif",
+				"width": 834,
+				"height": 1112,
+				"alt": "Cariari Community — tablet view"
+			},
+			"mobile": {
+				"webp": "/screenshots/cariari-community/mobile.webp",
+				"avif": "/screenshots/cariari-community/mobile.avif",
+				"width": 390,
+				"height": 844,
+				"alt": "Cariari Community — mobile view"
+			}
+		},
+		"ad-agency": {
+			"desktop": {
+				"webp": "/screenshots/ad-agency/desktop.webp",
+				"avif": "/screenshots/ad-agency/desktop.avif",
+				"width": 1440,
+				"height": 900,
+				"alt": "Ad Agency — desktop view"
+			},
+			"desktop-full": {
+				"webp": "/screenshots/ad-agency/desktop-full.webp",
+				"avif": "/screenshots/ad-agency/desktop-full.avif",
+				"width": 1200,
+				"height": 750,
+				"alt": "Ad Agency — desktop full view"
+			},
+			"tablet": {
+				"webp": "/screenshots/ad-agency/tablet.webp",
+				"avif": "/screenshots/ad-agency/tablet.avif",
+				"width": 834,
+				"height": 1112,
+				"alt": "Ad Agency — tablet view"
+			},
+			"mobile": {
+				"webp": "/screenshots/ad-agency/mobile.webp",
+				"avif": "/screenshots/ad-agency/mobile.avif",
+				"width": 390,
+				"height": 844,
+				"alt": "Ad Agency — mobile view"
+			}
+		},
+		"cariari-agency": {
+			"desktop": {
+				"webp": "/screenshots/cariari-agency/desktop.webp",
+				"avif": "/screenshots/cariari-agency/desktop.avif",
+				"width": 1440,
+				"height": 900,
+				"alt": "Cariari Agency — desktop view"
+			},
+			"desktop-full": {
+				"webp": "/screenshots/cariari-agency/desktop-full.webp",
+				"avif": "/screenshots/cariari-agency/desktop-full.avif",
+				"width": 1200,
+				"height": 750,
+				"alt": "Cariari Agency — desktop full view"
+			},
+			"tablet": {
+				"webp": "/screenshots/cariari-agency/tablet.webp",
+				"avif": "/screenshots/cariari-agency/tablet.avif",
+				"width": 834,
+				"height": 1112,
+				"alt": "Cariari Agency — tablet view"
+			},
+			"mobile": {
+				"webp": "/screenshots/cariari-agency/mobile.webp",
+				"avif": "/screenshots/cariari-agency/mobile.avif",
+				"width": 390,
+				"height": 844,
+				"alt": "Cariari Agency — mobile view"
+			}
+		}
+	}
+}

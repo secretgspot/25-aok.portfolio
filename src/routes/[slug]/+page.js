@@ -1,15 +1,15 @@
 import { error } from '@sveltejs/kit';
-import projects from '$lib/projects.json';
+import { getProject } from '#lib/projects.js';
+
+export const prerender = true;
 
 /** @type {import('./$types').PageLoad} */
 export function load({ params }) {
-    const project = projects.find((p) => p.slug === params.slug);
+	const project = getProject(params.slug);
 
-    if (!project) {
-        throw error(404, 'Project not found');
-    }
+	if (!project) {
+		error(404, 'Project not found');
+	}
 
-    return {
-        project
-    };
+	return { project };
 }

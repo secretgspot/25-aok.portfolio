@@ -1,226 +1,175 @@
 <script>
-	import { onMount } from 'svelte';
-	import { sound } from '$lib/audio.js';
-	import { buzz } from '$lib/vibrate.js';
+	import { sound } from '#lib/audio.js';
+	import { buzz } from '#lib/vibrate.js';
 
+	/** @type {{ url: string, title: string }} */
 	let { url, title } = $props();
-	let selectedDevice = $state('desktop');
 
-	// Device configurations
-	const devices = {
-		mobile: { width: '375px', height: '667px', label: 'Mobile' },
-		tablet: { width: '768px', height: '1024px', label: 'Tablet' },
-		desktop: { width: '100%', height: '100%', label: 'Desktop' },
-	};
+	let open = $state(false);
+	let everOpened = $state(false);
+	/** @type {'desktop' | 'tablet' | 'mobile'} */
+	let device = $state('desktop');
 
-	onMount(() => {
-		// Load Open Props CSS
-		if (!document.querySelector('link[href*="open-props"]')) {
-			const link = document.createElement('link');
-			link.rel = 'stylesheet';
-			link.href = 'https://unpkg.com/open-props@1.7.4/open-props.min.css';
-			document.head.appendChild(link);
-		}
+	$effect(() => {
+		if (open) everOpened = true;
 	});
+
+	const devices = [
+		{ id: 'desktop', label: 'Desktop' },
+		{ id: 'tablet', label: 'Tablet' },
+		{ id: 'mobile', label: 'Mobile' }
+	];
 </script>
 
-<details class="live-instance">
-	<summary class="summary" use:sound={'live_instance'} use:buzz={'live_instance'}>
+<details class="live" bind:open use:sound={'live_instance'} use:buzz={'live_instance'}>
+	<summary>
 		<h2>Live instance</h2>
+		<span class="hint">{open ? 'Hide preview' : 'Preview the live site'}</span>
 	</summary>
 
-	<!-- Device Toggle -->
-	<div class="device-toggle">
-		{#each Object.entries(devices) as [key, device]}
-			<label class="toggle-option" use:sound={'tick'} use:buzz={'tick'}>
-				<input type="radio" name="device-size" value={key} bind:group={selectedDevice} />
-				<span class="toggle-label">{device.label}</span>
-			</label>
-		{/each}
-	</div>
+	{#if everOpened}
+		<div class="toolbar">
+			<fieldset class="devices">
+				<legend class="visually-hidden">Preview size</legend>
+				{#each devices as option (option.id)}
+					<label>
+						<input type="radio" name="preview-size" value={option.id} bind:group={device} />
+						<span>{option.label}</span>
+					</label>
+				{/each}
+			</fieldset>
 
-	<!-- Iframe Container -->
-	<div class="iframe-wrapper" data-device={selectedDevice}>
-		<div class="iframe-container">
+			<a class="external" href={url} target="_blank" rel="noopener noreferrer">
+				Open live site ↗
+			</a>
+		</div>
+
+		<div class="stage" data-device={device}>
 			<iframe
 				src={url}
-				{title}
-				frameborder="0"
-				allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-				allowfullscreen></iframe>
+				title="{title} — live site preview"
+				loading="lazy"
+				referrerpolicy="strict-origin-when-cross-origin"
+				allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"></iframe>
 		</div>
-	</div>
+	{/if}
 </details>
 
 <style>
-	.live-instance {
+	.live {
+		margin-inline: var(--size-4);
+		margin-block: var(--size-8);
 		padding: var(--size-3);
-		margin-block: var(--size-9);
-		margin-inline: var(--size-3);
-		border: var(--border-size-2) solid var(--brand);
+		border: var(--border-size-1) solid var(--border-1);
 		border-radius: var(--radius-3);
 	}
-	.live-instance[open] .summary:before {
-		content: '❌';
-		animation: pop 0.3s cubic-bezier(0.01, 0.29, 0.38, 2.37);
-	}
-	.summary {
-		list-style-image: none;
-		cursor: pointer;
-		position: relative;
+
+	summary {
 		display: flex;
 		align-items: center;
-		&::marker {
-			content: none;
-		}
-		&:before {
-			content: '🧿';
-			width: 45px;
-			aspect-ratio: 1;
-			display: flex;
-			align-items: center;
-			justify-content: center;
-		}
-		&:focus {
-			outline: none;
-		}
-
-		h2 {
-			margin: 0;
-		}
-	}
-
-	@keyframes pop {
-		50% {
-			transform: scale(1.1);
-		}
-	}
-
-	/* Device Toggle Styles */
-	.device-toggle {
-		display: flex;
-		gap: var(--size-2, 0.5rem);
-		margin-bottom: var(--size-4, 1rem);
-		padding: var(--size-2, 0.5rem);
-		background: var(--surface-2, #f8fafc);
-		border-radius: var(--radius-3, 12px);
-		border: var(--border-size-1, 1px) solid var(--border-1, #e2e8f0);
-		box-shadow: var(--shadow-2, 0 1px 3px rgba(0, 0, 0, 0.1));
-	}
-
-	.toggle-option {
-		flex: 1;
+		justify-content: space-between;
+		gap: var(--size-3);
 		cursor: pointer;
-		position: relative;
 	}
 
-	.toggle-option input[type='radio'] {
+	summary::marker {
+		content: '';
+	}
+
+	summary::before {
+		content: '▶';
+		font-size: var(--font-size-0);
+		transition: rotate 0.2s var(--ease-out-3);
+	}
+
+	.live[open] summary::before {
+		rotate: 90deg;
+	}
+
+	summary h2 {
+		flex: 1;
+		margin: 0;
+		font-size: var(--font-size-3);
+	}
+
+	.hint {
+		color: var(--text-2);
+		font-size: var(--font-size-0);
+	}
+
+	.toolbar {
+		display: flex;
+		flex-wrap: wrap;
+		align-items: center;
+		justify-content: space-between;
+		gap: var(--size-3);
+		margin-block: var(--size-3);
+	}
+
+	.devices {
+		display: flex;
+		gap: var(--size-1);
+		margin: 0;
+		padding: var(--size-1);
+		border: var(--border-size-1) solid var(--border-1);
+		border-radius: var(--radius-2);
+		background: var(--surface-2);
+	}
+
+	.devices label {
+		position: relative;
+		cursor: pointer;
+	}
+
+	.devices input {
 		position: absolute;
 		opacity: 0;
-		width: 0;
-		height: 0;
 	}
 
-	.toggle-label {
+	.devices span {
 		display: block;
-		padding: var(--size-2, 0.5rem) var(--size-3, 0.75rem);
-		text-align: center;
-		border-radius: var(--radius-2, 8px);
-		font-size: var(--font-size-1, 0.875rem);
-		color: var(--text-2, #64748b);
-		background: transparent;
-		border: var(--border-size-1, 1px) solid transparent;
-		transition: all var(--animation-speed-1, 150ms) var(--ease-out-2, ease-out);
+		padding: var(--size-1) var(--size-3);
+		border-radius: var(--radius-2);
+		color: var(--text-2);
+		font-size: var(--font-size-0);
 	}
 
-	.toggle-option:hover .toggle-label {
-		background: var(--surface-3, #ffffff);
-		color: var(--text-1, #334155);
+	.devices input:checked + span {
+		background: var(--brand);
+		color: var(--surface-1);
 	}
 
-	.toggle-option input[type='radio']:checked + .toggle-label {
-		background: var(--brand, #3b82f6);
-		color: var(--surface-1, #ffffff);
-		border-color: var(--brand, #3b82f6);
-		box-shadow: var(--shadow-3, 0 4px 6px rgba(0, 0, 0, 0.1));
+	.devices input:focus-visible + span {
+		outline: 2px solid var(--accent);
+		outline-offset: 2px;
 	}
 
-	/* Iframe Wrapper */
-	.iframe-wrapper {
-		position: relative;
-		width: 100%;
+	.external {
+		color: var(--text-1);
+		font-size: var(--font-size-0);
+	}
+
+	.stage {
 		display: flex;
 		justify-content: center;
-		min-height: 400px;
-	}
-
-	.iframe-container {
-		position: relative;
-		background: var(--surface-1);
-		border-radius: var(--radius-3, 12px);
-		padding: var(--size-2);
-		box-shadow: var(--shadow-2);
-		border: var(--border-size-1, 1px) solid var(--surface-4);
+		block-size: min(75dvh, 720px);
+		border-radius: var(--radius-2);
+		background: var(--surface-2);
 		overflow: hidden;
 	}
 
-	/* Device-specific sizing */
-	.iframe-wrapper[data-device='mobile'] .iframe-container {
-		width: 375px;
-		height: 667px;
-		max-width: 100%;
-	}
-
-	.iframe-wrapper[data-device='tablet'] .iframe-container {
-		width: 768px;
-		height: 1024px;
-		max-width: 100%;
-	}
-
-	.iframe-wrapper[data-device='desktop'] .iframe-container {
-		width: 100%;
-		height: 600px;
-		max-height: 80vh;
-	}
-
-	iframe {
-		width: 100%;
-		height: 100%;
+	.stage iframe {
+		inline-size: 100%;
+		block-size: 100%;
 		border: 0;
-		border-radius: var(--radius-2);
+		background: white;
 	}
 
-	/* Responsive adjustments */
-	@media (max-width: 768px) {
-		.device-toggle {
-			flex-direction: column;
-			gap: var(--size-1, 0.25rem);
-		}
-
-		.iframe-wrapper[data-device='mobile'] .iframe-container,
-		.iframe-wrapper[data-device='tablet'] .iframe-container {
-			width: 100%;
-			height: 400px;
-		}
+	.stage[data-device='tablet'] iframe {
+		inline-size: min(768px, 100%);
 	}
 
-	/* Enhanced visual effects */
-	.iframe-container {
-		transition: all var(--animation-speed-2, 300ms) var(--ease-out-3, ease-out);
-	}
-
-	.iframe-wrapper[data-device='mobile'] .iframe-container {
-		/* transform: scale(1); */
-		box-shadow: var(--shadow-5, 0 20px 25px rgba(0, 0, 0, 0.15));
-	}
-
-	.iframe-wrapper[data-device='tablet'] .iframe-container {
-		/* transform: scale(0.95); */
-		box-shadow: var(--shadow-4, 0 10px 15px rgba(0, 0, 0, 0.1));
-	}
-
-	.iframe-wrapper[data-device='desktop'] .iframe-container {
-		/* transform: scale(1); */
-		box-shadow: var(--shadow-3, 0 4px 6px rgba(0, 0, 0, 0.1));
+	.stage[data-device='mobile'] iframe {
+		inline-size: min(390px, 100%);
 	}
 </style>

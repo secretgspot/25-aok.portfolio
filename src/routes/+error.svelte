@@ -1,56 +1,59 @@
 <script>
 	import { page } from '$app/state';
-	import Logo from '$lib/Logo.svelte';
-	import { onMount } from 'svelte';
+	import { site } from '#lib/site.js';
 
-	let { position } = $props();
-
-	let logoSrc = $state('');
-
-	function newLogo() {
-		// This might result in a 404 error if a logo for the generated number doesn't exist.
-		const randomNumber = Math.floor(Math.random() * 136) + 1;
-		logoSrc = `/logos/logo_${randomNumber}.webp`;
-	}
-
-	onMount(() => {
-		newLogo();
-	});
+	const notFound = $derived(page.status === 404);
+	const title = $derived(notFound ? `Page not found — ${site.name}` : `Something went wrong — ${site.name}`);
 </script>
 
+<svelte:head>
+	<title>{title}</title>
+	<meta name="robots" content="noindex" />
+</svelte:head>
+
 <article class="error-page">
-	<h1 class="title">{page.status}: {page.error?.message}</h1>
-
-	{#if logoSrc}
-		<img src={logoSrc} alt="Random Logo" class="logo-image" />
-	{/if}
-	<div class="url">{page.url}</div>
+	<p class="status">{page.status}</p>
+	<h1>{notFound ? 'Page not found' : 'Something went wrong'}</h1>
+	<p class="message">
+		{notFound
+			? 'That page does not exist. It may have been renamed or removed.'
+			: (page.error?.message ?? 'Please try again in a moment.')}
+	</p>
+	<a class="home" href="/">← Back to projects</a>
 </article>
-
-<Logo position="start" />
 
 <style>
 	.error-page {
 		display: grid;
-		place-content: center;
-		justify-items: center;
-		align-items: center;
-		flex: 1;
-		& > * {
-			grid-area: 1/1;
-		}
+		justify-items: start;
+		gap: var(--size-3);
+		max-inline-size: 46rem;
+		margin-inline: auto;
+		padding: var(--size-9) var(--size-4);
+	}
 
-		.title {
-			z-index: 1;
-		}
+	.status {
+		margin: 0;
+		color: var(--text-2);
+		font-size: var(--font-size-0);
+		font-variant-numeric: tabular-nums;
+		letter-spacing: 0.08em;
+	}
 
-		.logo-image {
-			max-width: 600px;
-			width: 100%;
-			aspect-ratio: 1;
-		}
-		.url {
-			align-self: self-end;
-		}
+	h1 {
+		margin: 0;
+		font-size: var(--font-size-fluid-2, clamp(2rem, 4vw + 1rem, 3.5rem));
+		text-wrap: balance;
+	}
+
+	.message {
+		margin: 0;
+		color: var(--text-2);
+		text-wrap: pretty;
+	}
+
+	.home {
+		margin-block-start: var(--size-3);
+		text-underline-offset: 0.2em;
 	}
 </style>

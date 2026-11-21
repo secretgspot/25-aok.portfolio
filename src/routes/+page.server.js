@@ -1,68 +1,108 @@
-import { VITE_GOOGLE_EMAIL } from '$env/static/private';
-import transporter from "$lib/emailSetup.server.js";
+import { fail } from '@sveltejs/kit';
+import { SMTP_USER } from '$app/env/private';
+import { transporter } from '#lib/server/mailer.js';
 
-export async function load() {
-	return {};
-};
+const WINDOW_MS = 60_000;
+const MAX_PER_WINDOW = 3;
+const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+/** @type {Map<string, number[]>} */
+const attempts = new Map();
+
+/** @param {string} key */
+function isRateLimited(key) {
+	const now = Date.now();
+	const recent = (attempts.get(key) ?? []).filter((time) => now - time < WINDOW_MS);
+	recent.push(now);
+	attempts.set(key, recent);
+
+	// Keep the map from growing without bound on a long-lived instance.
+	if (attempts.size > 500) {
+		for (const [existingKey, times] of attempts) {
+			if (!times.some((time) => now - time < WINDOW_MS)) attempts.delete(existingKey);
+		}
+	}
+
+	return recent.length > MAX_PER_WINDOW;
+}
+
+/** @param {string} value */
+function escapeHtml(value) {
+	return value.replace(
+		/[&<>"']/g,
+		(character) =>
+			/** @type {Record<string, string>} */ ({
+				'&': '&amp;',
+				'<': '&lt;',
+				'>': '&gt;',
+				'"': '&quot;',
+				"'": '&#39;'
+			})[character]
+	);
+}
 
 export const actions = {
-	// default: async ({ request }) => {
-	// 	const formData = await request.formData();
-	// 	const data = Object.fromEntries(formData);
-	// 	// return { data };
-	// 	console.log('Form data:', data);
-	// }
-	default: async ({ request }) => {
+	default: async ({ request, getClientAddress }) => {
+		const formData = await request.formData();
+
+		const name = String(formData.get('name') ?? '').trim();
+		const email = String(formData.get('email') ?? '').trim();
+		const message = String(formData.get('message') ?? '').trim();
+		const company = String(formData.get('company') ?? '').trim();
+
+		/** @type {Record<string, string>} */
+		const values = { name, email, message };
+
+		// Honeypot: real people never fill this in.
+		if (company) {
+			return fail(400, { error: 'Unable to send this message.', values });
+		}
+
+		if (name.length < 2 || name.length > 80) {
+			return fail(400, { error: 'Please enter your name (2–80 characters).', values });
+		}
+
+		if (email.length > 200 || !EMAIL_PATTERN.test(email)) {
+			return fail(400, { error: 'Please enter a valid email address.', values });
+		}
+
+		if (message.length < 10 || message.length > 5000) {
+			return fail(400, { error: 'Please write a message between 10 and 5,000 characters.', values });
+		}
+
+		if (isRateLimited(getClientAddress())) {
+			return fail(429, {
+				error: 'Too many messages from this address. Please try again in a minute.',
+				values
+			});
+		}
+
+		const html = `
+			<div style="font-family: system-ui, sans-serif; font-size: 16px; line-height: 1.6; color: #222;">
+				<h2 style="margin: 0 0 16px;">New message from the portfolio contact form</h2>
+				<p style="margin: 0 0 8px;"><strong>From:</strong> ${escapeHtml(name)}</p>
+				<p style="margin: 0 0 20px;"><strong>Email:</strong> ${escapeHtml(email)}</p>
+				<div style="padding: 16px; border-radius: 8px; background: #f5f5f5; white-space: pre-wrap;">${escapeHtml(message)}</div>
+			</div>
+		`;
+
 		try {
-			const formData = await request.formData();
-			const email = formData.get("email");
-			const name = formData.get("name");
-			const body = formData.get("message");
-
-			let html = `
-				<div style="font-family: 'Lato', Helvetica, Arial, sans-serif; font-size: 16px; line-height: 1.6; color: #333333;">
-						<h3 style="color: #000000; font-size: 20px; margin-bottom: 15px;">New message from Portfolio Contact Form</h3>
-
-						<p style="margin-bottom: 8px;"><strong>From:</strong> <span style="color: #000000;">${name}</span></p>
-						<p style="margin-bottom: 20px;"><strong>Email:</strong> <a href="mailto:${email}" style="color: blue; text-decoration: none;">${email}</a></p>
-
-						<div style="background-color: #f8f8f8; border: 1px solid #e0e0e0; padding: 15px; border-radius: 5px; margin-top: 15px; word-wrap: break-word;">
-								${body}
-						</div>
-
-						<p style="margin-top: 20px; font-size: 14px; color: #777777;">This message was sent via the contact form on your portfolio website.</p>
-				</div>
-			`;
-
-			const message = {
-				from: VITE_GOOGLE_EMAIL,
-				to: VITE_GOOGLE_EMAIL,
-				subject: `Portfolio message from ${name}, ${email}`,
-				text: body,
-				html: html,
-			};
-
-			/** @param {any} message */
-			const sendEmail = async (message) => {
-				await new Promise((resolve, reject) => {
-					transporter.sendMail(message, (error, info) => {
-						if (error) {
-							console.error("📬 Error sending email:", error);
-							reject(error);
-						} else {
-							console.log("📬 Email sent:", info.response);
-							resolve(info);
-						}
-					});
-				});
-			}
-
-			await sendEmail(message);
+			await transporter.sendMail({
+				from: SMTP_USER,
+				to: SMTP_USER,
+				replyTo: email,
+				subject: `Portfolio message from ${name}`,
+				text: `From: ${name} <${email}>\n\n${message}`,
+				html
+			});
 
 			return { success: true };
 		} catch (error) {
-			console.error("Error:", error);
-			return { error: true, success: false };
+			console.error('Contact form failed:', error);
+			return fail(502, {
+				error: 'The message could not be sent. Please try again or email me directly.',
+				values
+			});
 		}
 	}
 };
