@@ -5,7 +5,7 @@
 	/** @type {{ url: string, title: string }} */
 	let { url, title } = $props();
 
-	let open = $state(false);
+	let open = $state(true);
 	let everOpened = $state(false);
 	/** @type {'desktop' | 'tablet' | 'mobile'} */
 	let device = $state('desktop');
@@ -60,7 +60,6 @@
 		margin-inline: var(--size-4);
 		margin-block: var(--size-8);
 		padding: var(--size-3);
-		border: var(--border-size-1) solid var(--border-1);
 		border-radius: var(--radius-3);
 	}
 
@@ -113,7 +112,6 @@
 		padding: var(--size-1);
 		border: var(--border-size-1) solid var(--border-1);
 		border-radius: var(--radius-2);
-		background: var(--surface-2);
 	}
 
 	.devices label {
@@ -154,7 +152,6 @@
 		justify-content: center;
 		block-size: min(75dvh, 720px);
 		border-radius: var(--radius-2);
-		background: var(--surface-2);
 		overflow: hidden;
 	}
 
@@ -162,7 +159,7 @@
 		inline-size: 100%;
 		block-size: 100%;
 		border: 0;
-		background: white;
+		background: transparent;
 	}
 
 	.stage[data-device='tablet'] iframe {

@@ -57,10 +57,6 @@
 
 <Iframe url={project.url} title={project.title} />
 
-{#if Object.keys(project.screenshots).length}
-	<Screenshots {project} />
-{/if}
-
 <style>
 	.back {
 		padding-inline: var(--size-4);

@@ -4,7 +4,7 @@
  *
  * Usage:
  *   npm run screenshots            # all projects
- *   npm run screenshots -- --only=cariari-agency
+ *   npm run screenshots -- --only=cariari-agency  # specific project
  *
  * Requires Chromium once: npx playwright install chromium
  */
