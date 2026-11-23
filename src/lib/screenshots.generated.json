@@ -1,5 +1,5 @@
 {
-	"generatedAt": "2026-11-20T23:17:02.158Z",
+	"generatedAt": "2026-11-23T17:40:07.394Z",
 	"projects": {
 		"cariari-pintor": {
 			"desktop": {
@@ -13,7 +13,7 @@
 				"webp": "/screenshots/cariari-pintor/desktop-full.webp",
 				"avif": "/screenshots/cariari-pintor/desktop-full.avif",
 				"width": 1200,
-				"height": 3374,
+				"height": 3375,
 				"alt": "Cariari Pintor — desktop full view"
 			},
 			"tablet": {
@@ -43,7 +43,7 @@
 				"webp": "/screenshots/cariari-community/desktop-full.webp",
 				"avif": "/screenshots/cariari-community/desktop-full.avif",
 				"width": 1200,
-				"height": 1569,
+				"height": 1558,
 				"alt": "Cariari Community — desktop full view"
 			},
 			"tablet": {
