@@ -18,11 +18,10 @@
 	});
 </script>
 
-<section class="card" aria-labelledby="contact-title" style="max-width: 24rem; width: 100%; margin-block-start: var(--size-4);">
+<section class="card" style="max-width: 24rem; width: 100%; margin-block-start: var(--size-4); text-align: center; margin-inline: auto;">
 	{#if success}
 		<div class="success" role="status" tabindex="-1" bind:this={successPanel}>
 			<p class="eyebrow">Message sent</p>
-			<h2 id="contact-title">Thanks for reaching out.</h2>
 			<p>I will get back to you as soon as I can.</p>
 			<button
 				type="button"
@@ -37,8 +36,6 @@
 			</button>
 		</div>
 	{:else}
-		<h2 id="contact-title" class="title">Contact</h2>
-
 		<form
 			method="POST"
 			class="contact-form"
@@ -126,13 +123,7 @@
 		--radius: var(--radius-2);
 	}
 
-	.title,
-	.success h2 {
-		font-size: clamp(1.2rem, 3vw + 0.8rem, 1.5rem);
-		margin-block: 0 var(--size-2);
-		text-wrap: balance;
-		color: var(--text-2);
-	}
+	
 
 	.contact-form {
 		padding: var(--size-2);
@@ -150,6 +141,7 @@
 		font-size: calc(var(--font-size-0) * 0.8);
 		color: var(--muted);
 		font-weight: 400;
+		text-align: left;
 	}
 
 	input,

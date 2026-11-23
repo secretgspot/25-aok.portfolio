@@ -34,6 +34,9 @@
 			<li><Card {project} priority={index === 0} /></li>
 		{/each}
 	</ul>
+
+	<p class="tagline">Bridging technical execution with strategic vision. I don't just build features; I engineer solutions that drive measurable business impact.</p>
+
 	<Contacts form={data.form} />
 </section>
 
@@ -54,5 +57,14 @@
 
 	.grid > li {
 		display: grid;
+	}
+
+	.tagline {
+		font-size: clamp(1.2rem, 3vw + 1rem, 1.5rem);
+		margin-block: var(--size-6) 0;
+		color: var(--muted);
+		text-align: center;
+		max-inline-size: 38rem;
+		margin-inline: auto;
 	}
 </style>
